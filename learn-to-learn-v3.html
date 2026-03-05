@@ -1,0 +1,2337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn To Learn — Belajar Lebih Mudah</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0E1E35;
+  --navy2: #1A3050;
+  --orange: #F4511E;
+  --orange2: #FF7043;
+  --yellow: #FFD600;
+  --teal: #00BFA5;
+  --cream: #FAFAF7;
+  --white: #fff;
+  --gray1: #F2F3F5;
+  --gray2: #C8CDD6;
+  --gray3: #7E8A9A;
+  --text: #0E1E35;
+  --radius: 20px;
+  --radius-lg: 32px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+h1,h2,h3,.display{font-family:'Syne',sans-serif}
+
+/* ── PAGE SYSTEM ── */
+.page{display:none;min-height:100vh;padding-top:72px}
+.page.active{display:block}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(250,250,247,.94);backdrop-filter:blur(16px);border-bottom:1px solid rgba(14,30,53,.07)}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none}
+.logo-box{width:38px;height:38px;background:var(--navy);border-radius:10px;display:grid;place-items:center;color:#fff;font-family:'Syne',sans-serif;font-size:20px;font-weight:800}
+.logo-name{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:var(--navy)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{text-decoration:none;font-size:14px;font-weight:500;color:var(--navy);opacity:.6;transition:.2s;cursor:pointer}
+.nav-links a:hover,.nav-links a.active{opacity:1}
+.nav-right{display:flex;align-items:center;gap:12px}
+.lang-toggle{display:flex;background:var(--gray1);border-radius:50px;padding:3px;gap:2px}
+.lang-btn{padding:5px 12px;border-radius:50px;border:none;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;background:transparent;color:var(--gray3);transition:.2s}
+.lang-btn.active{background:var(--navy);color:#fff}
+.btn-nav-ghost{padding:9px 18px;border-radius:50px;border:2px solid rgba(14,30,53,.2);background:transparent;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--navy);transition:.2s}
+.btn-nav-ghost:hover{border-color:var(--navy);background:var(--navy);color:#fff}
+.btn-nav-primary{padding:9px 20px;border-radius:50px;border:none;background:var(--orange);color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(244,81,30,.35);transition:.2s}
+.btn-nav-primary:hover{background:var(--orange2);transform:translateY(-1px)}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 28px;border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:.25s;text-decoration:none}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 6px 22px rgba(244,81,30,.38)}
+.btn-primary:hover{background:var(--orange2);transform:translateY(-2px);box-shadow:0 10px 30px rgba(244,81,30,.45)}
+.btn-dark{background:var(--navy);color:#fff}
+.btn-dark:hover{background:var(--navy2);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--navy);border:2px solid rgba(14,30,53,.2)}
+.btn-outline:hover{border-color:var(--navy);background:var(--navy);color:#fff}
+.btn-white{background:#fff;color:var(--orange)}
+.btn-white:hover{transform:translateY(-2px)}
+.btn-sm{padding:10px 20px;font-size:13px}
+.btn-teal{background:var(--teal);color:#fff}
+
+/* ── TAGS ── */
+.tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--orange);margin-bottom:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:50px;font-size:12px;font-weight:600}
+.chip-teal{background:rgba(0,191,165,.12);color:var(--teal)}
+.chip-orange{background:rgba(244,81,30,.1);color:var(--orange)}
+.chip-navy{background:rgba(14,30,53,.08);color:var(--navy)}
+.chip-yellow{background:rgba(255,214,0,.2);color:#7A6000}
+
+/* ══════════════════════════════════
+   HOME PAGE
+══════════════════════════════════ */
+.hero{padding:80px 48px 100px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;overflow:hidden;min-height:calc(100vh - 72px)}
+.hero::before{content:'';position:absolute;right:-300px;top:-200px;width:800px;height:800px;background:radial-gradient(circle,rgba(244,81,30,.1) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:'';position:absolute;left:-200px;bottom:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,191,165,.08) 0%,transparent 65%);pointer-events:none}
+
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(244,81,30,.1);color:var(--orange);padding:7px 16px;border-radius:50px;font-size:13px;font-weight:600;margin-bottom:22px}
+.pulse-dot{width:7px;height:7px;background:var(--orange);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+
+.hero h1{font-size:66px;line-height:1.04;letter-spacing:-1.5px;margin-bottom:20px;color:var(--navy)}
+.hero h1 span{color:var(--orange);font-style:italic}
+.hero-sub{font-size:17px;line-height:1.75;color:var(--gray3);max-width:480px;margin-bottom:36px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px}
+.hero-stats{display:flex;gap:0}
+.stat-divider{width:1px;background:rgba(14,30,53,.1);margin:0 28px}
+.stat-num{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--navy)}
+.stat-label{font-size:12px;color:var(--gray3);margin-top:2px}
+
+/* Hero right — phone mockup */
+.hero-right{position:relative;display:flex;justify-content:center}
+.phone-wrap{position:relative;width:300px}
+.phone-frame{background:var(--navy);border-radius:40px;padding:16px;box-shadow:0 40px 100px rgba(14,30,53,.25);width:300px;animation:float 5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.phone-screen{background:var(--cream);border-radius:28px;overflow:hidden}
+.phone-header{background:var(--navy);padding:18px 18px 14px;color:#fff}
+.phone-header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.phone-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:800}
+.phone-sub{font-size:11px;opacity:.5;margin-top:2px}
+.phone-map{height:150px;background:linear-gradient(135deg,#1A3050 0%,#0E1E35 100%);position:relative;overflow:hidden}
+.map-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:18px 18px}
+.map-road-h{position:absolute;left:0;right:0;background:rgba(255,255,255,.1)}
+.map-road-v{position:absolute;top:0;bottom:0;background:rgba(255,255,255,.1)}
+.map-you{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center}
+.you-dot{width:14px;height:14px;background:var(--orange);border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 6px rgba(244,81,30,.25)}
+.you-lbl{font-size:9px;color:var(--orange);font-weight:700;margin-top:3px;white-space:nowrap}
+.map-teacher-pin{position:absolute;display:flex;flex-direction:column;align-items:center;cursor:pointer}
+.map-teacher-pin .av{width:32px;height:32px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.3);display:grid;place-items:center;font-size:14px}
+.map-teacher-pin .pin-line{width:2px;height:6px;background:#fff;opacity:.6}
+.phone-teachers{padding:12px}
+.phone-teacher-row{display:flex;align-items:center;gap:10px;padding:9px 10px;background:#fff;border-radius:12px;margin-bottom:8px;cursor:pointer;transition:.2s}
+.phone-teacher-row:hover{transform:translateX(3px)}
+.pt-avatar{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:17px;flex-shrink:0}
+.pt-name{font-size:12px;font-weight:700;color:var(--navy)}
+.pt-sub{font-size:10px;color:var(--gray3)}
+.pt-dist{font-size:11px;font-weight:700;color:var(--orange);margin-left:auto;white-space:nowrap}
+.pt-avail{display:inline-block;width:6px;height:6px;background:var(--teal);border-radius:50%;margin-right:3px}
+
+/* Floating notification */
+.float-notif{position:absolute;top:-24px;right:-36px;background:#fff;border-radius:18px;padding:14px 16px;box-shadow:0 16px 50px rgba(14,30,53,.15);min-width:210px;animation:float 4s ease-in-out infinite 1.2s;border:1px solid rgba(14,30,53,.06)}
+.notif-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.notif-icon{width:32px;height:32px;background:rgba(244,81,30,.1);border-radius:10px;display:grid;place-items:center;font-size:16px}
+.notif-title{font-size:12px;font-weight:700;color:var(--navy)}
+.notif-body{font-size:11px;color:var(--gray3)}
+.notif-btns{display:flex;gap:6px;margin-top:10px}
+.notif-btn{flex:1;padding:7px;border-radius:10px;border:none;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit}
+.notif-accept{background:var(--teal);color:#fff}
+.notif-decline{background:var(--gray1);color:var(--navy)}
+
+/* Progress card floating */
+.float-progress{position:absolute;bottom:-20px;left:-40px;background:#fff;border-radius:18px;padding:14px 16px;box-shadow:0 16px 50px rgba(14,30,53,.13);animation:float 4.5s ease-in-out infinite 0.5s;border:1px solid rgba(14,30,53,.06)}
+.prog-title{font-size:11px;color:var(--gray3);margin-bottom:8px;font-weight:600}
+.prog-bars{display:flex;flex-direction:column;gap:6px}
+.prog-row{display:flex;align-items:center;gap:8px}
+.prog-label{font-size:10px;font-weight:600;color:var(--navy);width:28px}
+.prog-track{flex:1;height:6px;background:var(--gray1);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;border-radius:3px;background:var(--orange)}
+.prog-val{font-size:10px;font-weight:700;color:var(--navy);width:28px;text-align:right}
+
+/* How it works */
+.section{padding:90px 48px}
+.section-header{margin-bottom:56px}
+.section-header.center{text-align:center}
+.section-header.center .section-sub{margin:0 auto}
+.section-title{font-size:44px;line-height:1.1;letter-spacing:-1px;color:var(--navy);margin-bottom:12px}
+.section-sub{font-size:16px;color:var(--gray3);line-height:1.75;max-width:520px}
+
+.dark-section{background:var(--navy);border-radius:var(--radius-lg);margin:0 32px;padding:80px 64px;position:relative;overflow:hidden}
+.dark-section::before{content:'';position:absolute;right:-150px;top:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(244,81,30,.18) 0%,transparent 60%);pointer-events:none}
+.dark-section .section-title{color:#fff}
+.dark-section .section-sub{color:rgba(255,255,255,.5)}
+.dark-section .tag{color:var(--yellow)}
+
+.how-tabs{display:flex;gap:10px;margin-bottom:44px;flex-wrap:wrap}
+.how-tab{padding:10px 22px;border-radius:50px;border:2px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);background:transparent;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
+.how-tab.active{background:var(--orange);border-color:var(--orange);color:#fff}
+.how-tab:hover:not(.active){border-color:rgba(255,255,255,.4);color:#fff}
+
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.step-card{position:relative}
+.step-num{font-family:'Syne',sans-serif;font-size:56px;font-weight:800;color:rgba(255,255,255,.04);line-height:1;margin-bottom:-8px}
+.step-icon{width:50px;height:50px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:16px;display:grid;place-items:center;font-size:22px;margin-bottom:14px}
+.step-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:8px}
+.step-desc{font-size:13px;color:rgba(255,255,255,.45);line-height:1.65}
+.step-arrow{position:absolute;right:-12px;top:70px;color:rgba(255,255,255,.15);font-size:18px}
+
+/* Modes */
+.modes-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+.mode-card{border-radius:28px;padding:40px;position:relative;overflow:hidden;cursor:pointer;transition:.3s}
+.mode-card:hover{transform:translateY(-5px)}
+.mode-navy{background:var(--navy);color:#fff}
+.mode-orange{background:var(--orange);color:#fff}
+.mode-yellow{background:var(--yellow);color:var(--navy)}
+.mode-card .mode-badge{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;background:rgba(255,255,255,.15);padding:5px 12px;border-radius:20px;margin-bottom:20px}
+.mode-yellow .mode-badge{background:rgba(14,30,53,.12)}
+.mode-card h3{font-family:'Syne',sans-serif;font-size:30px;line-height:1.1;margin-bottom:12px}
+.mode-card p{font-size:14px;opacity:.7;line-height:1.7;margin-bottom:24px}
+.mode-yellow p{opacity:.65}
+.mode-features{display:flex;flex-direction:column;gap:8px}
+.mode-feature{display:flex;align-items:center;gap:8px;font-size:13px;opacity:.8}
+.mode-feature::before{content:'✓';width:19px;height:19px;background:rgba(255,255,255,.2);border-radius:50%;display:grid;place-items:center;font-size:10px;flex-shrink:0}
+.mode-yellow .mode-feature::before{background:rgba(14,30,53,.1)}
+.mode-bg{position:absolute;right:20px;bottom:16px;font-size:90px;opacity:.15;pointer-events:none}
+
+/* Subjects */
+.subjects-wrap{background:var(--gray1);padding:80px 48px}
+.subjects-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:48px}
+.subject-card{background:#fff;border-radius:20px;padding:24px 20px;text-align:center;cursor:pointer;border:2px solid transparent;transition:.25s}
+.subject-card:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:0 14px 40px rgba(244,81,30,.1)}
+.subject-icon{font-size:36px;margin-bottom:12px}
+.subject-name{font-size:13px;font-weight:700;color:var(--navy)}
+.subject-kelas{font-size:11px;color:var(--gray3);margin-top:3px}
+
+/* Teachers section */
+.teachers-section{padding:90px 48px}
+.teachers-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;flex-wrap:gap}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{padding:8px 18px;border-radius:50px;border:2px solid rgba(14,30,53,.12);background:#fff;font-size:13px;font-weight:600;color:var(--navy);cursor:pointer;font-family:inherit;transition:.2s}
+.filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.filter-btn:hover:not(.active){border-color:var(--navy)}
+.teachers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.teacher-card{background:#fff;border-radius:24px;padding:28px 22px;text-align:center;border:2px solid transparent;cursor:pointer;transition:.3s;position:relative;overflow:hidden}
+.teacher-card:hover{border-color:var(--orange);transform:translateY(-6px);box-shadow:0 20px 50px rgba(244,81,30,.1)}
+.teacher-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--orange);transform:scaleX(0);transition:.3s;transform-origin:left}
+.teacher-card:hover::after{transform:scaleX(1)}
+.tc-available{position:absolute;top:16px;right:16px;width:10px;height:10px;border-radius:50%;background:var(--teal);border:2px solid #fff}
+.tc-busy{background:var(--yellow)}
+.tc-avatar{width:68px;height:68px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;font-size:34px;border:3px solid var(--gray1)}
+.tc-name{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.tc-subject{font-size:12px;color:var(--gray3);margin-bottom:12px}
+.tc-chips{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin-bottom:16px}
+.tc-stats{display:flex;justify-content:center;gap:20px;padding-top:14px;border-top:1px solid var(--gray1)}
+.tc-stat-val{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--navy)}
+.tc-stat-key{font-size:10px;color:var(--gray3);margin-top:1px}
+
+/* Testimonials */
+.testi-section{background:var(--gray1);padding:90px 48px}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:50px}
+.testi-card{background:#fff;border-radius:24px;padding:32px 28px}
+.testi-stars{color:var(--yellow);font-size:16px;margin-bottom:16px;letter-spacing:2px}
+.testi-text{font-size:14px;line-height:1.8;color:var(--navy);margin-bottom:20px;opacity:.8;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:12px}
+.testi-avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:20px;background:var(--gray1)}
+.testi-name{font-size:14px;font-weight:700;color:var(--navy)}
+.testi-role{font-size:12px;color:var(--gray3)}
+
+/* Pricing */
+.pricing-section{padding:90px 48px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px;align-items:end}
+.pricing-card{background:#fff;border-radius:28px;padding:40px 32px;border:2px solid rgba(14,30,53,.08);transition:.3s;cursor:pointer;position:relative}
+.pricing-card:hover{transform:translateY(-4px)}
+.pricing-card.featured{background:var(--navy);border-color:var(--navy);padding-top:56px;transform:translateY(-14px)}
+.pricing-card.featured:hover{transform:translateY(-20px)}
+.featured-flag{position:absolute;top:22px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:11px;font-weight:700;padding:4px 16px;border-radius:20px;white-space:nowrap}
+.price-plan{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray3);margin-bottom:10px}
+.featured .price-plan{color:rgba(255,255,255,.4)}
+.price-amount{font-family:'Syne',sans-serif;font-size:42px;font-weight:800;color:var(--navy);line-height:1}
+.featured .price-amount{color:#fff}
+.price-period{font-size:14px;color:var(--gray3);margin-bottom:28px;margin-top:4px}
+.featured .price-period{color:rgba(255,255,255,.35)}
+.price-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:30px}
+.price-list li{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--navy)}
+.featured .price-list li{color:rgba(255,255,255,.7)}
+.price-check{width:20px;height:20px;border-radius:50%;background:rgba(0,191,165,.15);color:var(--teal);display:grid;place-items:center;font-size:11px;flex-shrink:0}
+.btn-price{width:100%;padding:14px;border-radius:50px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;border:2px solid rgba(14,30,53,.15);background:transparent;color:var(--navy)}
+.btn-price:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn-price-featured{background:var(--orange);color:#fff;border-color:var(--orange);box-shadow:0 6px 20px rgba(244,81,30,.4)}
+.btn-price-featured:hover{background:var(--orange2);border-color:var(--orange2)}
+
+/* CTA band */
+.cta-band{background:var(--orange);border-radius:var(--radius-lg);margin:0 32px 80px;padding:72px 64px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:40px;position:relative;overflow:hidden}
+.cta-band::after{content:'🎓';position:absolute;right:180px;font-size:180px;opacity:.12;pointer-events:none}
+.cta-band h2{font-size:44px;color:#fff;line-height:1.1;letter-spacing:-1px}
+.cta-band p{font-size:16px;color:rgba(255,255,255,.7);margin-top:12px;line-height:1.7}
+.cta-btns{display:flex;flex-direction:column;gap:12px;flex-shrink:0}
+
+/* Footer */
+footer{background:var(--navy);padding:64px 48px 0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.07)}
+.footer-brand .logo-box{background:var(--orange)}
+.footer-brand .logo-name{color:#fff}
+.footer-tagline{font-size:14px;color:rgba(255,255,255,.4);line-height:1.75;margin-top:16px;max-width:260px}
+.footer-col-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.9);margin-bottom:18px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-links a{text-decoration:none;font-size:14px;color:rgba(255,255,255,.4);transition:.2s;cursor:pointer}
+.footer-links a:hover{color:#fff}
+.footer-bottom{padding:22px 0;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:rgba(255,255,255,.25)}
+
+/* ══════════════════════════════════
+   FIND TEACHER PAGE
+══════════════════════════════════ */
+.find-page{padding:0}
+.find-hero{background:var(--navy);padding:56px 48px 40px;position:relative;overflow:hidden}
+.find-hero::before{content:'';position:absolute;right:-100px;top:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(244,81,30,.2) 0%,transparent 60%);pointer-events:none}
+.find-hero h1{font-size:40px;color:#fff;margin-bottom:8px;letter-spacing:-1px}
+.find-hero p{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:28px}
+.search-box{background:#fff;border-radius:16px;padding:8px;display:flex;gap:8px;align-items:center;max-width:700px}
+.search-inp{flex:1;border:none;outline:none;font-family:inherit;font-size:14px;color:var(--navy);padding:8px 12px}
+.search-inp::placeholder{color:var(--gray3)}
+.search-select{border:none;outline:none;font-family:inherit;font-size:13px;color:var(--navy);padding:8px 14px;border-radius:10px;background:var(--gray1);cursor:pointer}
+.search-go{padding:11px 22px;background:var(--orange);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:.2s}
+.search-go:hover{background:var(--orange2)}
+.find-body{display:grid;grid-template-columns:280px 1fr;gap:0}
+.find-sidebar{padding:28px;border-right:1px solid rgba(14,30,53,.08);background:#fff;position:sticky;top:72px;height:calc(100vh - 72px);overflow-y:auto}
+.sidebar-section{margin-bottom:28px}
+.sidebar-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gray3);margin-bottom:12px}
+.sidebar-chips{display:flex;flex-wrap:wrap;gap:7px}
+.sidebar-chip{padding:6px 14px;border-radius:50px;border:2px solid rgba(14,30,53,.1);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;background:#fff;color:var(--navy);transition:.2s}
+.sidebar-chip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.sidebar-chip:hover:not(.active){border-color:var(--navy)}
+.find-results{padding:28px}
+.results-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.results-count{font-size:15px;font-weight:600;color:var(--navy)}
+.sort-select{border:2px solid rgba(14,30,53,.1);border-radius:10px;padding:8px 14px;font-family:inherit;font-size:13px;color:var(--navy);cursor:pointer;outline:none}
+.results-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.result-card{background:#fff;border-radius:20px;padding:22px;display:flex;gap:16px;border:2px solid transparent;cursor:pointer;transition:.25s}
+.result-card:hover{border-color:var(--orange);box-shadow:0 10px 30px rgba(244,81,30,.08)}
+.rc-avatar{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:26px;flex-shrink:0}
+.rc-info{flex:1}
+.rc-name{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.rc-subject{font-size:12px;color:var(--gray3);margin-bottom:8px}
+.rc-chips{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.rc-bottom{display:flex;justify-content:space-between;align-items:center}
+.rc-price{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--navy)}
+.rc-price span{font-family:'DM Sans',sans-serif;font-size:11px;font-weight:400;color:var(--gray3)}
+.rc-rating{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--navy)}
+.rc-dist{font-size:12px;font-weight:700;color:var(--orange)}
+.rc-available{position:absolute;top:0;right:0}
+
+/* ══════════════════════════════════
+   DASHBOARD PAGE
+══════════════════════════════════ */
+.dashboard{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 72px)}
+.dash-sidebar{background:var(--navy);padding:28px 20px;position:sticky;top:72px;height:calc(100vh - 72px)}
+.dash-profile{text-align:center;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:24px}
+.dash-avatar{width:64px;height:64px;background:rgba(255,255,255,.1);border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;font-size:28px}
+.dash-name{font-size:15px;font-weight:700;color:#fff}
+.dash-role{font-size:12px;color:rgba(255,255,255,.4);margin-top:3px}
+.dash-nav{list-style:none;display:flex;flex-direction:column;gap:4px}
+.dash-nav li{padding:11px 14px;border-radius:12px;font-size:14px;font-weight:500;color:rgba(255,255,255,.5);cursor:pointer;transition:.2s;display:flex;align-items:center;gap:10px}
+.dash-nav li:hover{background:rgba(255,255,255,.07);color:#fff}
+.dash-nav li.active{background:rgba(244,81,30,.2);color:var(--orange)}
+.dash-nav li .nav-icon{font-size:18px;width:22px;text-align:center}
+.dash-body{padding:36px 40px;background:var(--gray1)}
+.dash-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px}
+.dash-greeting h2{font-size:26px;font-weight:800;color:var(--navy);letter-spacing:-0.5px}
+.dash-greeting p{font-size:14px;color:var(--gray3);margin-top:4px}
+.dash-actions{display:flex;gap:10px}
+
+/* Dashboard cards */
+.dash-stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.dash-stat{background:#fff;border-radius:20px;padding:22px 20px}
+.dash-stat-icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:20px;margin-bottom:14px}
+.dash-stat-val{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--navy)}
+.dash-stat-label{font-size:12px;color:var(--gray3);margin-top:3px}
+.dash-stat-delta{font-size:11px;font-weight:600;margin-top:6px}
+.delta-up{color:var(--teal)}
+.delta-down{color:var(--orange)}
+
+.dash-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:20px;margin-bottom:20px}
+.dash-card{background:#fff;border-radius:20px;padding:26px}
+.dash-card-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:18px;display:flex;justify-content:space-between;align-items:center}
+.dash-card-title a{font-size:12px;color:var(--orange);font-weight:600;text-decoration:none;cursor:pointer}
+
+/* Progress bars */
+.progress-item{margin-bottom:16px}
+.progress-item:last-child{margin-bottom:0}
+.progress-label-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.progress-subject{font-size:13px;font-weight:600;color:var(--navy)}
+.progress-pct{font-size:13px;font-weight:700;color:var(--navy)}
+.progress-track{width:100%;height:8px;background:var(--gray1);border-radius:4px;overflow:hidden}
+.progress-bar{height:100%;border-radius:4px;transition:width 1s ease}
+
+/* Schedule */
+.schedule-item{display:flex;align-items:center;gap:14px;padding:12px;border-radius:14px;background:var(--gray1);margin-bottom:10px;cursor:pointer;transition:.2s}
+.schedule-item:hover{background:rgba(244,81,30,.06);border-color:var(--orange)}
+.sched-time{text-align:center;flex-shrink:0;width:48px}
+.sched-hour{font-size:13px;font-weight:800;color:var(--navy)}
+.sched-min{font-size:11px;color:var(--gray3)}
+.sched-divider{width:1px;height:36px;background:rgba(14,30,53,.1)}
+.sched-info{flex:1}
+.sched-subject{font-size:14px;font-weight:700;color:var(--navy)}
+.sched-teacher{font-size:12px;color:var(--gray3);margin-top:2px}
+.sched-tag{margin-left:auto}
+
+/* Activity feed */
+.activity-item{display:flex;gap:12px;margin-bottom:16px}
+.act-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:18px;flex-shrink:0}
+.act-content{flex:1}
+.act-title{font-size:13px;font-weight:600;color:var(--navy)}
+.act-time{font-size:11px;color:var(--gray3);margin-top:2px}
+.act-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;margin-top:4px;display:inline-block}
+
+/* Child card */
+.child-card{display:flex;gap:14px;align-items:center;padding:14px;background:var(--gray1);border-radius:16px;margin-bottom:12px;cursor:pointer;transition:.2s}
+.child-card:hover{background:rgba(244,81,30,.06)}
+.child-avatar{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:#fff}
+.child-name{font-size:14px;font-weight:700;color:var(--navy)}
+.child-grade{font-size:12px;color:var(--gray3);margin-top:2px}
+.child-score{margin-left:auto;text-align:right}
+.child-score-val{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--navy)}
+.child-score-lbl{font-size:10px;color:var(--gray3)}
+
+/* ══════════════════════════════════
+   COURSES PAGE
+══════════════════════════════════ */
+.courses-hero{background:var(--navy);padding:56px 48px 44px;position:relative;overflow:hidden}
+.courses-hero::before{content:'';position:absolute;left:-100px;bottom:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,191,165,.15) 0%,transparent 60%);pointer-events:none}
+.courses-hero h1{font-size:38px;color:#fff;letter-spacing:-1px;margin-bottom:8px}
+.courses-hero p{font-size:15px;color:rgba(255,255,255,.5);margin-bottom:28px}
+.courses-filters{display:flex;gap:8px;flex-wrap:wrap}
+.courses-body{padding:40px 48px}
+.courses-subject-nav{display:flex;gap:10px;margin-bottom:36px;flex-wrap:wrap}
+.subj-pill{padding:9px 20px;border-radius:50px;border:2px solid rgba(14,30,53,.1);background:#fff;font-size:13px;font-weight:600;color:var(--navy);cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:7px;transition:.2s}
+.subj-pill.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.subj-pill:hover:not(.active){border-color:var(--navy)}
+.courses-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.course-card{background:#fff;border-radius:24px;overflow:hidden;cursor:pointer;transition:.3s;border:2px solid transparent}
+.course-card:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:0 16px 40px rgba(244,81,30,.1)}
+.course-thumb{height:140px;display:grid;place-items:center;font-size:60px;position:relative}
+.course-thumb-badge{position:absolute;top:12px;right:12px}
+.course-body{padding:20px}
+.course-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:5px}
+.course-subject{font-size:12px;color:var(--gray3);margin-bottom:12px}
+.course-meta{display:flex;justify-content:space-between;align-items:center}
+.course-lessons{font-size:12px;color:var(--gray3)}
+.course-progress-row{margin-top:12px}
+.course-prog-bar{height:4px;background:var(--gray1);border-radius:2px;overflow:hidden;margin-top:5px}
+.course-prog-fill{height:100%;border-radius:2px;background:var(--teal)}
+.course-prog-label{display:flex;justify-content:space-between;font-size:11px;color:var(--gray3)}
+
+/* Featured course banner */
+.featured-course{background:linear-gradient(135deg,var(--navy) 0%,#1A3050 100%);border-radius:28px;padding:40px;margin-bottom:36px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:32px;position:relative;overflow:hidden}
+.featured-course::after{content:'📐';position:absolute;right:170px;font-size:120px;opacity:.1;pointer-events:none}
+.fc-tag{display:inline-block;background:rgba(244,81,30,.25);color:var(--orange);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:12px}
+.fc-title{font-size:26px;color:#fff;letter-spacing:-0.5px;margin-bottom:8px}
+.fc-desc{font-size:14px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:20px}
+.fc-meta{display:flex;gap:20px}
+.fc-meta-item{font-size:12px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:5px}
+.fc-right{text-align:center}
+.fc-progress-circle{width:100px;height:100px;position:relative;margin:0 auto 10px}
+.fc-pct{position:absolute;inset:0;display:grid;place-items:center;font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:#fff}
+
+/* ══════════════════════════════════
+   WAITLIST PAGE
+══════════════════════════════════ */
+.waitlist-page{min-height:calc(100vh - 72px);display:grid;grid-template-columns:1fr 1fr}
+.waitlist-left{background:var(--navy);padding:72px 56px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.waitlist-left::before{content:'';position:absolute;left:-150px;bottom:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(244,81,30,.2) 0%,transparent 60%);pointer-events:none}
+.waitlist-left::after{content:'';position:absolute;right:-100px;top:-100px;width:300px;height:300px;background:radial-gradient(circle,rgba(0,191,165,.12) 0%,transparent 60%);pointer-events:none}
+.waitlist-left h1{font-size:46px;color:#fff;line-height:1.1;letter-spacing:-1.5px;margin-bottom:18px}
+.waitlist-left h1 span{color:var(--orange)}
+.waitlist-left p{font-size:16px;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:36px}
+.waitlist-perks{display:flex;flex-direction:column;gap:14px}
+.perk-item{display:flex;align-items:center;gap:12px}
+.perk-icon{width:42px;height:42px;background:rgba(255,255,255,.08);border-radius:12px;display:grid;place-items:center;font-size:20px;flex-shrink:0}
+.perk-text{font-size:14px;color:rgba(255,255,255,.7)}
+.perk-text strong{color:#fff;display:block;margin-bottom:2px}
+.waitlist-count{margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,.1)}
+.wc-num{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;color:#fff}
+.wc-label{font-size:14px;color:rgba(255,255,255,.45);margin-top:4px}
+.wc-avatars{display:flex;margin-top:14px}
+.wc-av{width:36px;height:36px;border-radius:50%;background:var(--navy2);border:2.5px solid var(--navy);display:grid;place-items:center;font-size:15px;margin-left:-8px}
+.wc-av:first-child{margin-left:0}
+
+.waitlist-right{padding:72px 56px;display:flex;flex-direction:column;justify-content:center;background:var(--cream)}
+.wl-form-title{font-size:32px;letter-spacing:-0.5px;color:var(--navy);margin-bottom:6px}
+.wl-form-sub{font-size:14px;color:var(--gray3);margin-bottom:36px;line-height:1.6}
+.wl-form{display:flex;flex-direction:column;gap:14px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--navy)}
+.form-input{padding:14px 16px;border:2px solid rgba(14,30,53,.1);border-radius:14px;font-family:inherit;font-size:14px;color:var(--navy);outline:none;transition:.2s;background:#fff}
+.form-input:focus{border-color:var(--orange)}
+.form-select{padding:14px 16px;border:2px solid rgba(14,30,53,.1);border-radius:14px;font-family:inherit;font-size:14px;color:var(--navy);outline:none;transition:.2s;background:#fff;cursor:pointer}
+.form-select:focus{border-color:var(--orange)}
+.form-checkbox-row{display:flex;align-items:flex-start;gap:10px}
+.form-checkbox{width:18px;height:18px;margin-top:2px;cursor:pointer;flex-shrink:0;accent-color:var(--orange)}
+.form-checkbox-label{font-size:13px;color:var(--gray3);line-height:1.5}
+.btn-submit{padding:16px;border-radius:14px;background:var(--orange);color:#fff;border:none;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:.25s;box-shadow:0 6px 22px rgba(244,81,30,.35)}
+.btn-submit:hover{background:var(--orange2);transform:translateY(-2px);box-shadow:0 10px 30px rgba(244,81,30,.45)}
+.form-note{font-size:12px;color:var(--gray3);text-align:center;line-height:1.5}
+
+/* Success state */
+.wl-success{display:none;text-align:center;padding:40px 20px}
+.wl-success.show{display:block}
+.wl-form-area.hidden{display:none}
+.success-icon{width:80px;height:80px;background:rgba(0,191,165,.12);border-radius:50%;display:grid;place-items:center;font-size:36px;margin:0 auto 24px;animation:popIn .4s ease}
+@keyframes popIn{0%{transform:scale(0)}80%{transform:scale(1.1)}100%{transform:scale(1)}}
+.success-title{font-size:28px;letter-spacing:-0.5px;color:var(--navy);margin-bottom:10px}
+.success-sub{font-size:15px;color:var(--gray3);line-height:1.7;margin-bottom:28px;max-width:320px;margin-left:auto;margin-right:auto}
+.success-num{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--orange);margin-bottom:4px}
+.success-num-label{font-size:13px;color:var(--gray3)}
+
+/* ══════════════════════════════════
+   MODAL
+══════════════════════════════════ */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(14,30,53,.6);z-index:1000;backdrop-filter:blur(6px);place-items:center}
+.modal-overlay.open{display:grid}
+.modal{background:#fff;border-radius:28px;padding:40px;max-width:520px;width:92%;position:relative;animation:slideUp .3s ease}
+@keyframes slideUp{from{transform:translateY(28px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-close{position:absolute;top:18px;right:18px;width:32px;height:32px;border-radius:50%;background:var(--gray1);border:none;cursor:pointer;font-size:15px;display:grid;place-items:center;color:var(--navy);transition:.2s}
+.modal-close:hover{background:var(--gray2)}
+.modal-teacher-top{display:flex;gap:16px;align-items:center;margin-bottom:24px}
+.modal-av{width:62px;height:62px;border-radius:18px;display:grid;place-items:center;font-size:30px;background:var(--gray1)}
+.modal-teacher-name{font-size:20px;font-weight:800;color:var(--navy)}
+.modal-teacher-subj{font-size:14px;color:var(--gray3)}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.modal-item{background:var(--gray1);padding:14px;border-radius:14px}
+.modal-item-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray3)}
+.modal-item-val{font-size:16px;font-weight:700;color:var(--navy);margin-top:4px}
+.modal-bio{font-size:14px;color:var(--gray3);line-height:1.7;margin-bottom:22px}
+.modal-actions{display:flex;gap:10px}
+
+/* Scroll anim */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Responsive basics */
+/* ── HAMBURGER ── */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:none;border-radius:8px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:.3s}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile drawer */
+.mobile-drawer{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(250,250,247,.98);backdrop-filter:blur(20px);z-index:190;flex-direction:column;padding:28px 24px;overflow-y:auto;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.mobile-drawer.open{transform:translateX(0)}
+.mobile-nav-item{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid rgba(14,30,53,.07);cursor:pointer;font-size:16px;font-weight:600;color:var(--navy);text-decoration:none}
+.mobile-nav-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:var(--gray1)}
+.mobile-lang{display:flex;gap:10px;margin:20px 0}
+.mobile-lang .lang-btn{flex:1;padding:12px;font-size:14px;text-align:center;border-radius:12px;border:2px solid rgba(14,30,53,.1)}
+.mobile-lang .lang-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.mobile-cta{margin-top:8px;display:flex;flex-direction:column;gap:10px}
+
+/* Bottom tab bar */
+.bottom-tab{display:none;position:fixed;bottom:0;left:0;right:0;z-index:190;background:rgba(250,250,247,.97);backdrop-filter:blur(16px);border-top:1px solid rgba(14,30,53,.08);padding:8px 0 env(safe-area-inset-bottom,8px)}
+.tab-items{display:flex;justify-content:space-around}
+.tab-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 12px;cursor:pointer;min-width:60px;border-radius:12px;transition:.2s;border:none;background:none;font-family:inherit}
+.tab-item .ti-icon{font-size:22px;line-height:1}
+.tab-item .ti-label{font-size:10px;font-weight:600;color:var(--gray3)}
+.tab-item.active .ti-label{color:var(--orange)}
+.tab-item.active .ti-icon{transform:scale(1.1)}
+
+@media(max-width:768px){
+  /* Nav */
+  nav{padding:0 16px;height:64px}
+  .page{padding-top:64px;padding-bottom:72px}
+  .nav-links{display:none}
+  .nav-right{display:none}
+  .hamburger{display:flex}
+  .mobile-drawer{display:flex}
+  .bottom-tab{display:block}
+
+  /* Hero */
+  .hero{grid-template-columns:1fr;padding:48px 20px 52px;gap:32px;min-height:auto}
+  .hero::before,.hero::after{display:none}
+  .hero-right{display:none}
+  .hero h1{font-size:34px;letter-spacing:-1px}
+  .hero-badge{font-size:12px}
+  .hero-sub{font-size:15px;margin-bottom:24px}
+  .hero-actions{gap:10px}
+  .hero-actions .btn{padding:13px 22px;font-size:14px}
+  .hero-stats{gap:0;flex-wrap:wrap}
+  .stat-num{font-size:22px}
+  .stat-divider{margin:0 16px}
+
+  /* How it works */
+  .dark-section{margin:0 12px;padding:40px 20px;border-radius:24px}
+  .dark-section .section-title{font-size:28px}
+  .steps-grid{grid-template-columns:1fr;gap:20px}
+  .step-arrow{display:none}
+  .how-tabs{gap:8px}
+  .how-tab{padding:9px 16px;font-size:13px}
+
+  /* Section */
+  .section{padding:52px 20px}
+  .section-title{font-size:30px}
+  .section-sub{font-size:14px}
+  .tag{font-size:11px}
+
+  /* Modes */
+  .modes-grid{grid-template-columns:1fr}
+  .mode-card{padding:28px 24px}
+  .mode-card h3{font-size:24px}
+  .mode-bg{font-size:60px}
+
+  /* Subjects */
+  .subjects-wrap{padding:52px 20px}
+  .subjects-wrap .section-title{font-size:30px}
+  .subjects-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .subject-card{padding:18px 14px}
+  .subject-icon{font-size:28px}
+  .subject-name{font-size:12px}
+
+  /* Teachers */
+  .teachers-section{padding:52px 20px}
+  .teachers-section .section-title{font-size:30px}
+  .teachers-header{flex-direction:column;align-items:flex-start;gap:16px}
+  .teachers-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .teacher-card{padding:18px 14px}
+  .tc-avatar{width:52px;height:52px;font-size:26px}
+  .tc-name{font-size:13px}
+  .tc-stats{gap:12px}
+
+  /* Testimonials */
+  .testi-section{padding:52px 20px}
+  .testi-section .section-title{font-size:30px}
+  .testi-grid{grid-template-columns:1fr;gap:14px}
+
+  /* Pricing */
+  .pricing-section{padding:52px 20px}
+  .pricing-section .section-title{font-size:30px}
+  .pricing-grid{grid-template-columns:1fr;gap:16px}
+  .pricing-card.featured{transform:none}
+  .pricing-card.featured:hover{transform:translateY(-4px)}
+  .price-amount{font-size:36px}
+
+  /* CTA */
+  .cta-band{margin:0 12px 72px;padding:40px 24px;grid-template-columns:1fr;border-radius:24px}
+  .cta-band::after{display:none}
+  .cta-band h2{font-size:30px}
+  .cta-btns{flex-direction:row;flex-wrap:wrap}
+  .cta-btns .btn{flex:1;font-size:13px;padding:13px 16px;text-align:center;justify-content:center;min-width:140px}
+
+  /* Footer */
+  footer{padding:40px 20px 0}
+  .footer-grid{grid-template-columns:1fr;gap:28px}
+  .footer-bottom{flex-direction:column;gap:6px;text-align:center;padding:18px 0}
+
+  /* Dashboard */
+  .dashboard{grid-template-columns:1fr}
+  .dash-sidebar{display:none}
+  .dash-body{padding:20px 16px}
+  .dash-topbar{flex-direction:column;align-items:flex-start;gap:14px}
+  .dash-greeting h2{font-size:20px}
+  .dash-stats-row{grid-template-columns:1fr 1fr;gap:10px}
+  .dash-stat{padding:16px 14px}
+  .dash-stat-val{font-size:20px}
+  .dash-grid{grid-template-columns:1fr;gap:14px}
+  .dash-card{padding:18px 16px}
+
+  /* Find teacher */
+  .find-hero{padding:36px 20px 28px}
+  .find-hero h1{font-size:26px}
+  .search-box{flex-wrap:wrap;gap:8px;padding:10px}
+  .search-inp{width:100%;order:0}
+  .search-select{flex:1;font-size:12px}
+  .search-go{width:100%;order:3;padding:12px}
+  .find-body{grid-template-columns:1fr}
+  .find-sidebar{display:none}
+  .find-results{padding:16px}
+  .results-grid{grid-template-columns:1fr;gap:12px}
+  .result-card{padding:16px}
+  .rc-avatar{width:46px;height:46px;font-size:22px}
+
+  /* Courses */
+  .courses-hero{padding:36px 20px 28px}
+  .courses-hero h1{font-size:26px}
+  .courses-body{padding:24px 16px}
+  .featured-course{grid-template-columns:1fr;gap:20px;padding:28px 24px;border-radius:22px}
+  .featured-course::after{display:none}
+  .fc-title{font-size:20px}
+  .fc-right{display:none}
+  .courses-subject-nav{gap:8px;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
+  .subj-pill{white-space:nowrap;font-size:12px;padding:8px 14px}
+  .courses-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .course-thumb{height:110px;font-size:44px}
+  .course-body{padding:14px}
+  .course-title{font-size:13px}
+
+  /* Waitlist */
+  .waitlist-page{grid-template-columns:1fr;min-height:auto}
+  .waitlist-left{display:none}
+  .waitlist-right{padding:36px 20px 80px}
+  .wl-form-title{font-size:26px}
+  .form-row{grid-template-columns:1fr}
+  .btn-submit{font-size:15px;padding:15px}
+
+  /* Modal */
+  .modal{padding:28px 20px;border-radius:22px;margin:0 12px}
+  .modal-grid{grid-template-columns:1fr 1fr}
+  .modal-actions{flex-direction:column}
+  .modal-actions .btn{width:100%;justify-content:center}
+}
+
+/* ══ TEACHER REGISTRATION PAGE ══ */
+.teacher-reg-page{min-height:calc(100vh - 72px)}
+.teacher-reg-hero{background:linear-gradient(135deg,var(--navy) 0%,#1A3050 100%);padding:56px 48px 44px;position:relative;overflow:hidden}
+.teacher-reg-hero::before{content:'';position:absolute;right:-100px;top:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(255,214,0,.15) 0%,transparent 60%);pointer-events:none}
+.teacher-reg-hero h1{font-size:40px;color:#fff;letter-spacing:-1px;margin-bottom:8px}
+.teacher-reg-hero p{font-size:15px;color:rgba(255,255,255,.55);margin-bottom:24px;max-width:560px;line-height:1.7}
+.teacher-perks-row{display:flex;gap:16px;flex-wrap:wrap}
+.teacher-perk{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:10px 16px;font-size:13px;color:#fff}
+
+.teacher-reg-body{display:grid;grid-template-columns:1fr 380px;gap:0;align-items:start}
+.teacher-reg-form{padding:40px 48px;background:var(--cream)}
+.teacher-reg-sidebar{padding:36px 32px;background:var(--gray1);border-left:1px solid rgba(14,30,53,.07);min-height:calc(100vh - 72px - 140px);position:sticky;top:72px}
+
+.reg-step-indicator{display:flex;gap:0;margin-bottom:40px;position:relative}
+.reg-step-indicator::before{content:'';position:absolute;top:16px;left:16px;right:16px;height:2px;background:rgba(14,30,53,.1);z-index:0}
+.reg-step{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;position:relative;z-index:1;cursor:pointer}
+.reg-step-circle{width:32px;height:32px;border-radius:50%;background:var(--gray2);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700;transition:.3s;border:3px solid var(--gray1)}
+.reg-step.active .reg-step-circle{background:var(--orange);border-color:var(--cream)}
+.reg-step.done .reg-step-circle{background:var(--teal);border-color:var(--cream)}
+.reg-step-label{font-size:10px;font-weight:600;color:var(--gray3);text-align:center;line-height:1.3}
+.reg-step.active .reg-step-label{color:var(--orange)}
+.reg-step.done .reg-step-label{color:var(--teal)}
+
+.reg-section{display:none}
+.reg-section.active{display:block}
+.reg-section-title{font-size:22px;font-weight:800;color:var(--navy);margin-bottom:4px;letter-spacing:-0.3px}
+.reg-section-sub{font-size:14px;color:var(--gray3);margin-bottom:28px;line-height:1.6}
+
+.form-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+.form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-grid-1{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:14px}
+
+.subject-picker{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.subject-pick-btn{padding:8px 16px;border-radius:50px;border:2px solid rgba(14,30,53,.12);background:#fff;font-size:13px;font-weight:600;color:var(--navy);cursor:pointer;font-family:inherit;transition:.2s;display:flex;align-items:center;gap:6px}
+.subject-pick-btn.selected{background:var(--navy);color:#fff;border-color:var(--navy)}
+.subject-pick-btn:hover:not(.selected){border-color:var(--navy)}
+
+.upload-zone{border:2px dashed rgba(14,30,53,.2);border-radius:16px;padding:28px;text-align:center;cursor:pointer;transition:.2s;background:#fff;margin-bottom:14px}
+.upload-zone:hover{border-color:var(--orange);background:rgba(244,81,30,.02)}
+.upload-zone-icon{font-size:32px;margin-bottom:8px}
+.upload-zone-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.upload-zone-sub{font-size:12px;color:var(--gray3)}
+.upload-zone.uploaded{border-color:var(--teal);background:rgba(0,191,165,.04)}
+
+.availability-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:14px}
+.day-btn{padding:10px 4px;border-radius:12px;border:2px solid rgba(14,30,53,.1);background:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;text-align:center;transition:.2s;color:var(--navy)}
+.day-btn.selected{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+.time-slots{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.time-slot{padding:8px 14px;border-radius:10px;border:2px solid rgba(14,30,53,.1);background:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--navy);transition:.2s}
+.time-slot.selected{background:var(--orange);color:#fff;border-color:var(--orange)}
+
+.reg-nav-btns{display:flex;gap:12px;margin-top:28px;padding-top:24px;border-top:1px solid rgba(14,30,53,.08)}
+.btn-reg-next{padding:14px 32px;background:var(--orange);color:#fff;border:none;border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:.25s;box-shadow:0 4px 16px rgba(244,81,30,.3)}
+.btn-reg-next:hover{background:var(--orange2);transform:translateY(-1px)}
+.btn-reg-back{padding:14px 24px;background:transparent;color:var(--navy);border:2px solid rgba(14,30,53,.15);border-radius:50px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
+.btn-reg-back:hover{background:var(--gray1)}
+
+.sidebar-why{background:#fff;border-radius:20px;padding:22px;margin-bottom:20px}
+.sidebar-why-title{font-size:15px;font-weight:800;color:var(--navy);margin-bottom:16px}
+.why-item{display:flex;gap:10px;margin-bottom:14px;align-items:flex-start}
+.why-item:last-child{margin-bottom:0}
+.why-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:18px;flex-shrink:0;background:var(--gray1)}
+.why-text-title{font-size:13px;font-weight:700;color:var(--navy)}
+.why-text-sub{font-size:12px;color:var(--gray3);margin-top:2px;line-height:1.5}
+
+.earnings-card{background:linear-gradient(135deg,var(--navy),var(--navy2));border-radius:20px;padding:22px;color:#fff;margin-bottom:20px}
+.earnings-title{font-size:13px;opacity:.6;margin-bottom:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px}
+.earnings-amount{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:#fff}
+.earnings-period{font-size:12px;opacity:.5;margin-bottom:16px}
+.earnings-breakdown{display:flex;flex-direction:column;gap:8px}
+.earn-row{display:flex;justify-content:space-between;font-size:13px;opacity:.7}
+.earn-row strong{opacity:1;color:#fff}
+
+.teacher-testimonial{background:var(--yellow);border-radius:20px;padding:20px}
+.teacher-testi-text{font-size:13px;line-height:1.7;color:var(--navy);margin-bottom:14px;font-style:italic;opacity:.85}
+.teacher-testi-author{font-size:12px;font-weight:700;color:var(--navy)}
+.teacher-testi-role{font-size:11px;color:var(--navy);opacity:.6;margin-top:2px}
+
+/* success state for teacher reg */
+.reg-success{display:none;text-align:center;padding:60px 40px}
+.reg-success.show{display:block}
+
+@media(max-width:768px){
+  .teacher-reg-hero{padding:36px 20px 28px}
+  .teacher-reg-hero h1{font-size:26px}
+  .teacher-reg-body{grid-template-columns:1fr}
+  .teacher-reg-sidebar{display:none}
+  .teacher-reg-form{padding:28px 20px}
+  .form-grid-3{grid-template-columns:1fr 1fr}
+  .form-grid-2{grid-template-columns:1fr}
+  .availability-grid{grid-template-columns:repeat(4,1fr)}
+  .reg-step-label{display:none}
+  .teacher-perks-row{flex-direction:column}
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" onclick="goPage('home')">
+    <div class="logo-box">L</div>
+    <span class="logo-name">Learn To Learn</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="goPage('home')" data-page="home" class="active" data-en="Home" data-id-text="Beranda">Beranda</a></li>
+    <li><a onclick="goPage('find')" data-page="find" data-en="Find Teacher" data-id-text="Cari Guru">Cari Guru</a></li>
+    <li><a onclick="goPage('courses')" data-page="courses" data-en="Courses" data-id-text="Kelas">Kelas</a></li>
+    <li><a onclick="goPage('dashboard')" data-page="dashboard" data-en="Dashboard" data-id-text="Dashboard">Dashboard</a></li>
+    <li><a onclick="goPage('teacher-reg')" data-page="teacher-reg" data-en="Become a Teacher" data-id-text="Jadi Guru">Jadi Guru</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('id')">🇮🇩 ID</button>
+      <button class="lang-btn" onclick="setLang('en')">🇬🇧 EN</button>
+    </div>
+    <button class="btn-nav-ghost" data-en="Log In" data-id-text="Masuk">Masuk</button>
+    <button class="btn-nav-primary" onclick="goPage('waitlist')" data-en="Join Waitlist" data-id-text="Daftar Gratis">Daftar Gratis</button>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleDrawer()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="mobile-lang">
+    <button class="lang-btn active" onclick="setLang('id');closeDrawer()">🇮🇩 Indonesia</button>
+    <button class="lang-btn" onclick="setLang('en');closeDrawer()">🇬🇧 English</button>
+  </div>
+  <div class="mobile-nav-item" onclick="goPage('home');closeDrawer()"><div class="mobile-nav-icon">🏠</div><span data-en="Home" data-id-text="Beranda">Beranda</span></div>
+  <div class="mobile-nav-item" onclick="goPage('find');closeDrawer()"><div class="mobile-nav-icon">🔍</div><span data-en="Find Teacher" data-id-text="Cari Guru">Cari Guru</span></div>
+  <div class="mobile-nav-item" onclick="goPage('courses');closeDrawer()"><div class="mobile-nav-icon">📚</div><span data-en="Courses" data-id-text="Kelas">Kelas</span></div>
+  <div class="mobile-nav-item" onclick="goPage('dashboard');closeDrawer()"><div class="mobile-nav-icon">📊</div><span data-en="Dashboard" data-id-text="Dashboard">Dashboard</span></div>
+  <div class="mobile-nav-item" onclick="goPage('teacher-reg');closeDrawer()"><div class="mobile-nav-icon">👩‍🏫</div><span data-en="Become a Teacher" data-id-text="Daftar Jadi Guru">Daftar Jadi Guru</span></div>
+  <div class="mobile-cta">
+    <button class="btn btn-primary" style="justify-content:center" onclick="goPage('waitlist');closeDrawer()">🚀 <span data-en="Join Waitlist — Free" data-id-text="Daftar Waitlist — Gratis">Daftar Waitlist — Gratis</span></button>
+    <button class="btn btn-outline" style="justify-content:center" data-en="Log In" data-id-text="Masuk">Masuk</button>
+  </div>
+</div>
+
+<!-- BOTTOM TAB BAR -->
+<div class="bottom-tab">
+  <div class="tab-items">
+    <button class="tab-item active" id="tab-home" onclick="goPage('home')">
+      <span class="ti-icon">🏠</span>
+      <span class="ti-label" data-en="Home" data-id-text="Beranda">Beranda</span>
+    </button>
+    <button class="tab-item" id="tab-find" onclick="goPage('find')">
+      <span class="ti-icon">🔍</span>
+      <span class="ti-label" data-en="Find" data-id-text="Cari">Cari</span>
+    </button>
+    <button class="tab-item" id="tab-courses" onclick="goPage('courses')">
+      <span class="ti-icon">📚</span>
+      <span class="ti-label" data-en="Courses" data-id-text="Kelas">Kelas</span>
+    </button>
+    <button class="tab-item" id="tab-dashboard" onclick="goPage('dashboard')">
+      <span class="ti-icon">📊</span>
+      <span class="ti-label">Dashboard</span>
+    </button>
+    <button class="tab-item" id="tab-waitlist" onclick="goPage('waitlist')">
+      <span class="ti-icon">✍️</span>
+      <span class="ti-label" data-en="Sign Up" data-id-text="Daftar">Daftar</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     HOME PAGE
+══════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        <span data-en="🇮🇩 Indonesia's #1 Tutoring Platform" data-id-text="🇮🇩 Platform Bimbingan Belajar Indonesia">🇮🇩 Platform Bimbingan Belajar Indonesia</span>
+      </div>
+      <h1><span data-en="Find the" data-id-text="Temukan Guru">Temukan Guru</span> <span data-en="Best" data-id-text="Terbaik"><em>Terbaik,</em></span><br><span data-en="Anytime Anywhere" data-id-text="Kapan & Di Mana Saja">Kapan & Di Mana Saja</span></h1>
+      <p class="hero-sub" data-en="Like Gojek, but for tutoring. Find the nearest verified teacher in minutes — face-to-face or online, your choice." data-id-text="Seperti Gojek, tapi untuk les privat. Temukan guru terverifikasi terdekat dalam hitungan menit — tatap muka langsung atau online, terserah kamu.">Seperti Gojek, tapi untuk les privat. Temukan guru terverifikasi terdekat dalam hitungan menit — tatap muka langsung atau online, terserah kamu.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" onclick="goPage('find')" data-en="🔍 Find a Teacher" data-id-text="🔍 Cari Guru Terdekat">🔍 Cari Guru Terdekat</button>
+        <button class="btn btn-dark" onclick="goPage('waitlist')" data-en="📋 Join Waitlist" data-id-text="📋 Daftar Waitlist">📋 Daftar Waitlist</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">500+</div><div class="stat-label" data-en="Verified Teachers" data-id-text="Guru Terverifikasi">Guru Terverifikasi</div></div>
+        <div class="stat-divider"></div>
+        <div><div class="stat-num">2.4K</div><div class="stat-label" data-en="Active Students" data-id-text="Siswa Aktif">Siswa Aktif</div></div>
+        <div class="stat-divider"></div>
+        <div><div class="stat-num">4.9★</div><div class="stat-label" data-en="Average Rating" data-id-text="Rating Rata-rata">Rating Rata-rata</div></div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <!-- Teacher request notification -->
+      <div class="float-notif">
+        <div class="notif-header">
+          <div class="notif-icon">🔔</div>
+          <div>
+            <div class="notif-title" data-en="New Request!" data-id-text="Permintaan Baru!">Permintaan Baru!</div>
+            <div class="notif-body" data-en="Budi needs Math teacher" data-id-text="Budi butuh guru Matematika">Budi butuh guru Matematika</div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--gray3)">📍 1.2 km · SD Kelas 4 · Sekarang</div>
+        <div class="notif-btns">
+          <button class="notif-btn notif-accept" data-en="✓ Accept" data-id-text="✓ Terima">✓ Terima</button>
+          <button class="notif-btn notif-decline" data-en="✗ Decline" data-id-text="✗ Tolak">✗ Tolak</button>
+        </div>
+      </div>
+
+      <!-- Phone mockup -->
+      <div class="phone-wrap">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="phone-header">
+              <div class="phone-header-row">
+                <div>
+                  <div class="phone-title">Learn To Learn</div>
+                  <div class="phone-sub" data-en="Yogyakarta, DIY" data-id-text="Yogyakarta, DIY">Yogyakarta, DIY</div>
+                </div>
+                <div class="chip chip-teal" style="font-size:10px">● Live</div>
+              </div>
+            </div>
+            <div class="phone-map">
+              <div class="map-dots"></div>
+              <div class="map-road-h" style="top:42%;height:10px"></div>
+              <div class="map-road-h" style="top:68%;height:7px"></div>
+              <div class="map-road-v" style="left:33%;width:8px"></div>
+              <div class="map-road-v" style="left:66%;width:7px"></div>
+              <div class="map-you">
+                <div class="you-dot"></div>
+                <div class="you-lbl" data-en="You" data-id-text="Kamu">Kamu</div>
+              </div>
+              <div class="map-teacher-pin" style="left:18%;top:20%">
+                <div class="av" style="background:#FFF3E0">👩‍🏫</div>
+                <div class="pin-line"></div>
+              </div>
+              <div class="map-teacher-pin" style="left:67%;top:18%">
+                <div class="av" style="background:#E3F2FD">👨‍🏫</div>
+                <div class="pin-line"></div>
+              </div>
+              <div class="map-teacher-pin" style="left:74%;top:63%">
+                <div class="av" style="background:#E8F5E9">👩‍💼</div>
+                <div class="pin-line"></div>
+              </div>
+            </div>
+            <div class="phone-teachers">
+              <div class="phone-teacher-row">
+                <div class="pt-avatar" style="background:#FFF3E0">👩‍🏫</div>
+                <div>
+                  <div class="pt-name">Ibu Sari</div>
+                  <div class="pt-sub">Matematika · <span class="pt-avail"></span><span data-en="Available" data-id-text="Tersedia">Tersedia</span></div>
+                </div>
+                <div class="pt-dist">1.2 km</div>
+              </div>
+              <div class="phone-teacher-row">
+                <div class="pt-avatar" style="background:#E3F2FD">👨‍🏫</div>
+                <div>
+                  <div class="pt-name">Pak Budi</div>
+                  <div class="pt-sub">Bahasa Inggris · <span class="pt-avail"></span><span data-en="Available" data-id-text="Tersedia">Tersedia</span></div>
+                </div>
+                <div class="pt-dist">2.1 km</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress float card -->
+      <div class="float-progress">
+        <div class="prog-title" data-en="📊 Andi's Progress This Week" data-id-text="📊 Progress Andi Minggu Ini">📊 Progress Andi Minggu Ini</div>
+        <div class="prog-bars">
+          <div class="prog-row">
+            <div class="prog-label">MTK</div>
+            <div class="prog-track"><div class="prog-fill" style="width:82%"></div></div>
+            <div class="prog-val">82%</div>
+          </div>
+          <div class="prog-row">
+            <div class="prog-label">IPA</div>
+            <div class="prog-track"><div class="prog-fill" style="width:75%;background:var(--teal)"></div></div>
+            <div class="prog-val">75%</div>
+          </div>
+          <div class="prog-row">
+            <div class="prog-label">B.ING</div>
+            <div class="prog-track"><div class="prog-fill" style="width:90%;background:var(--yellow)"></div></div>
+            <div class="prog-val">90%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div style="padding:0 32px 32px">
+  <div class="dark-section reveal">
+    <div class="section-header">
+      <div class="tag" data-en="How It Works" data-id-text="Cara Kerja">Cara Kerja</div>
+      <h2 class="section-title" data-en="As easy as ordering a ride" data-id-text="Semudah pesan ojek online">Semudah pesan ojek online</h2>
+      <p class="section-sub" data-en="Two learning modes in one platform. Pick what works best for your child." data-id-text="Dua mode belajar dalam satu platform. Pilih yang paling cocok untuk si kecil.">Dua mode belajar dalam satu platform. Pilih yang paling cocok untuk si kecil.</p>
+    </div>
+    <div class="how-tabs">
+      <button class="how-tab active" onclick="switchHowTab(this,'offline')">🏠 <span data-en="Offline (Teacher Comes)" data-id-text="Offline (Guru Datang)">Offline (Guru Datang)</span></button>
+      <button class="how-tab" onclick="switchHowTab(this,'online')">💻 <span data-en="Online (Video + Live)" data-id-text="Online (Video + Live)">Online (Video + Live)</span></button>
+    </div>
+    <div id="how-offline" class="steps-grid">
+      <div class="step-card"><div class="step-num">01</div><div class="step-icon">📍</div><div class="step-title" data-en="Open the App" data-id-text="Buka Website / App">Buka Website / App</div><div class="step-desc" data-en="Enter your location, subject, and child's grade level" data-id-text="Masukkan lokasi, mata pelajaran, dan kelas anak kamu">Masukkan lokasi, mata pelajaran, dan kelas anak kamu</div><div class="step-arrow">→</div></div>
+      <div class="step-card"><div class="step-num">02</div><div class="step-icon">👀</div><div class="step-title" data-en="See Nearest Teachers" data-id-text="Lihat Guru Terdekat">Lihat Guru Terdekat</div><div class="step-desc" data-en="Real-time map shows available teachers near you" data-id-text="Peta real-time menampilkan guru tersedia di sekitar kamu">Peta real-time menampilkan guru tersedia di sekitar kamu</div><div class="step-arrow">→</div></div>
+      <div class="step-card"><div class="step-num">03</div><div class="step-icon">💬</div><div class="step-title" data-en="Chat & Agree" data-id-text="Chat & Sepakati">Chat & Sepakati</div><div class="step-desc" data-en="Discuss schedule, material, and fee with the teacher directly" data-id-text="Diskusikan jadwal, materi, dan biaya langsung dengan guru">Diskusikan jadwal, materi, dan biaya langsung dengan guru</div><div class="step-arrow">→</div></div>
+      <div class="step-card"><div class="step-num">04</div><div class="step-icon">📚</div><div class="step-title" data-en="Start Learning!" data-id-text="Mulai Belajar!">Mulai Belajar!</div><div class="step-desc" data-en="Teacher comes to your home. Parents can monitor progress in the dashboard." data-id-text="Guru datang ke rumah. Orang tua pantau progress di dashboard.">Guru datang ke rumah. Orang tua pantau progress di dashboard.</div></div>
+    </div>
+    <div id="how-online" class="steps-grid" style="display:none">
+      <div class="step-card"><div class="step-num">01</div><div class="step-icon">🎯</div><div class="step-title" data-en="Choose a Course" data-id-text="Pilih Kelas Online">Pilih Kelas Online</div><div class="step-desc" data-en="Browse interactive videos or live classes aligned with the school curriculum" data-id-text="Browse video interaktif atau kelas live sesuai kurikulum sekolah">Browse video interaktif atau kelas live sesuai kurikulum sekolah</div><div class="step-arrow">→</div></div>
+      <div class="step-card"><div class="step-num">02</div><div class="step-icon">▶️</div><div class="step-title" data-en="Watch & Learn" data-id-text="Tonton & Belajar">Tonton & Belajar</div><div class="step-desc" data-en="Interactive videos with quizzes, animations and easy explanations" data-id-text="Video interaktif dengan kuis, animasi, dan penjelasan mudah dipahami">Video interaktif dengan kuis, animasi, dan penjelasan mudah dipahami</div><div class="step-arrow">→</div></div>
+      <div class="step-card"><div class="step-num">03</div><div class="step-icon">🎥</div><div class="step-title" data-en="Live Session" data-id-text="Sesi Live Guru">Sesi Live Guru</div><div class="step-desc" data-en="Ask the teacher directly via video call for anything unclear" data-id-text="Tanya langsung ke guru via video call untuk bagian yang belum paham">Tanya langsung ke guru via video call untuk bagian yang belum paham</div><div class="step-arrow">→</div></div>
+      <div class="step-card"><div class="step-num">04</div><div class="step-icon">🏆</div><div class="step-title" data-en="Track Progress" data-id-text="Pantau Progress">Pantau Progress</div><div class="step-desc" data-en="Track scores, earn badges, and get weekly progress reports" data-id-text="Track nilai, raih badge, dan laporan perkembangan mingguan">Track nilai, raih badge, dan laporan perkembangan mingguan</div></div>
+    </div>
+  </div>
+  </div>
+
+  <!-- MODES -->
+  <div class="section reveal">
+    <div class="section-header">
+      <div class="tag" data-en="Features" data-id-text="Fitur Unggulan">Fitur Unggulan</div>
+      <h2 class="section-title" data-en="One platform,<br>every way to learn" data-id-text="Satu platform,<br>semua cara belajar">Satu platform,<br>semua cara belajar</h2>
+    </div>
+    <div class="modes-grid">
+      <div class="mode-card mode-navy">
+        <div class="mode-badge" data-en="🏠 OFFLINE MODE" data-id-text="🏠 MODE OFFLINE">🏠 MODE OFFLINE</div>
+        <h3 data-en="Teacher Comes<br>To Your Home" data-id-text="Guru<br>Datang ke Rumah">Guru<br>Datang ke Rumah</h3>
+        <p data-en="Like ordering a ride — the nearest verified teacher connects with parents instantly. Safe, trusted, affordable." data-id-text="Seperti pesan ojek — guru terverifikasi terdekat langsung terhubung dengan orang tua. Aman, terpercaya, terjangkau.">Seperti pesan ojek — guru terverifikasi terdekat langsung terhubung dengan orang tua. Aman, terpercaya, terjangkau.</p>
+        <div class="mode-features">
+          <div class="mode-feature" data-en="Verified teachers with education background" data-id-text="Guru terverifikasi berlatar belakang pendidikan">Guru terverifikasi berlatar belakang pendidikan</div>
+          <div class="mode-feature" data-en="Real-time location matching like Gojek" data-id-text="Real-time location matching seperti Gojek">Real-time location matching seperti Gojek</div>
+          <div class="mode-feature" data-en="Transparent ratings and reviews" data-id-text="Rating & review transparan">Rating & review transparan</div>
+          <div class="mode-feature" data-en="In-app chat & schedule management" data-id-text="Chat & jadwal langsung di app">Chat & jadwal langsung di app</div>
+        </div>
+        <div class="mode-bg">🏠</div>
+        <button class="btn btn-primary" style="margin-top:28px" onclick="goPage('find')" data-en="Find Nearest Teacher →" data-id-text="Cari Guru Terdekat →">Cari Guru Terdekat →</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div class="mode-card mode-orange">
+          <div class="mode-badge" data-en="💻 ONLINE MODE" data-id-text="💻 MODE ONLINE">💻 MODE ONLINE</div>
+          <h3 style="font-size:24px" data-en="Learn From Anywhere" data-id-text="Belajar dari Mana Saja">Belajar dari Mana Saja</h3>
+          <p data-en="Interactive videos + live sessions. Flexible, replay anytime." data-id-text="Video interaktif + sesi live guru. Fleksibel, bisa diulang kapan saja.">Video interaktif + sesi live guru. Fleksibel, bisa diulang kapan saja.</p>
+          <div class="mode-features">
+            <div class="mode-feature" data-en="Full SD curriculum video library" data-id-text="Video kurikulum SD lengkap">Video kurikulum SD lengkap</div>
+            <div class="mode-feature" data-en="Live face-to-face online sessions" data-id-text="Sesi tatap muka online">Sesi tatap muka online</div>
+          </div>
+          <div class="mode-bg">💻</div>
+        </div>
+        <div class="mode-card mode-yellow">
+          <div class="mode-badge" data-en="👁️ PARENT MONITOR" data-id-text="👁️ PANTAU ORANG TUA">👁️ PANTAU ORANG TUA</div>
+          <h3 style="font-size:24px;color:var(--navy)" data-en="Parents Can Monitor" data-id-text="Orang Tua Bisa Pantau">Orang Tua Bisa Pantau</h3>
+          <p data-en="Parent dashboard: see learning activity, scores, and teacher reports in real-time." data-id-text="Dashboard khusus orang tua: lihat aktivitas belajar, nilai, laporan guru secara real-time.">Dashboard khusus orang tua: lihat aktivitas belajar, nilai, laporan guru secara real-time.</p>
+          <div class="mode-features" style="color:var(--navy)">
+            <div class="mode-feature" style="color:var(--navy)" data-en="Automated weekly reports" data-id-text="Laporan mingguan otomatis">Laporan mingguan otomatis</div>
+            <div class="mode-feature" style="color:var(--navy)" data-en="Session notifications" data-id-text="Notifikasi sesi belajar">Notifikasi sesi belajar</div>
+          </div>
+          <div class="mode-bg" style="color:var(--navy)">📊</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBJECTS -->
+  <div class="subjects-wrap reveal">
+    <div class="tag" data-en="Subjects" data-id-text="Mata Pelajaran">Mata Pelajaran</div>
+    <h2 class="section-title" data-en="All SD Subjects<br>Available" data-id-text="Semua Pelajaran<br>SD Tersedia">Semua Pelajaran<br>SD Tersedia</h2>
+    <p class="section-sub" data-en="Aligned with Indonesia's Merdeka Belajar curriculum for grades 1–6." data-id-text="Sesuai Kurikulum Merdeka Belajar untuk kelas 1 hingga 6 SD.">Sesuai Kurikulum Merdeka Belajar untuk kelas 1 hingga 6 SD.</p>
+    <div class="subjects-grid" style="margin-top:40px">
+      <div class="subject-card" onclick="goPage('courses')"><div class="subject-icon">🔢</div><div class="subject-name">Matematika</div><div class="subject-kelas">Kelas 1–6</div></div>
+      <div class="subject-card" onclick="goPage('courses')"><div class="subject-icon">🔬</div><div class="subject-name">IPA</div><div class="subject-kelas">Kelas 3–6</div></div>
+      <div class="subject-card" onclick="goPage('courses')"><div class="subject-icon">🌏</div><div class="subject-name">IPS</div><div class="subject-kelas">Kelas 3–6</div></div>
+      <div class="subject-card" onclick="goPage('courses')"><div class="subject-icon">📖</div><div class="subject-name">B. Indonesia</div><div class="subject-kelas">Kelas 1–6</div></div>
+      <div class="subject-card" onclick="goPage('courses')"><div class="subject-icon">🇬🇧</div><div class="subject-name">B. Inggris</div><div class="subject-kelas">Kelas 1–6</div></div>
+      <div class="subject-card" onclick="goPage('courses')"><div class="subject-icon">🙏</div><div class="subject-name">PAI</div><div class="subject-kelas">Kelas 1–6</div></div>
+      <div class="subject-card" onclick="goPage('courses')"><div class="subject-icon">🎨</div><div class="subject-name">SBdP</div><div class="subject-kelas">Kelas 1–6</div></div>
+      <div class="subject-card" onclick="goPage('courses')"><div class="subject-icon">🏃</div><div class="subject-name">PJOK</div><div class="subject-kelas">Kelas 1–6</div></div>
+      <div class="subject-card" onclick="goPage('courses')"><div class="subject-icon">💻</div><div class="subject-name">Informatika</div><div class="subject-kelas">Kelas 4–6</div></div>
+      <div class="subject-card" onclick="goPage('courses')"><div class="subject-icon">🧮</div><div class="subject-name">Matematika+</div><div class="subject-kelas">Olimpiade</div></div>
+    </div>
+  </div>
+
+  <!-- TEACHERS -->
+  <div class="teachers-section reveal">
+    <div class="teachers-header">
+      <div>
+        <div class="tag" data-en="Our Teachers" data-id-text="Guru Kami">Guru Kami</div>
+        <h2 class="section-title" data-en="Verified teachers,<br>ready to teach" data-id-text="Guru terverifikasi,<br>siap mengajar">Guru terverifikasi,<br>siap mengajar</h2>
+      </div>
+      <div class="filter-row">
+        <button class="filter-btn active" onclick="filterTeacher(this)">Semua</button>
+        <button class="filter-btn" onclick="filterTeacher(this)">Matematika</button>
+        <button class="filter-btn" onclick="filterTeacher(this)">Bahasa</button>
+        <button class="filter-btn" onclick="filterTeacher(this)">IPA</button>
+      </div>
+    </div>
+    <div class="teachers-grid">
+      <div class="teacher-card" onclick="openTeacherModal('Ibu Sari Dewi','Matematika & IPA','👩‍🏫','#FFF3E0','1.2 km','4.9','Rp 60–100k','124','3 tahun')">
+        <div class="tc-available"></div>
+        <div class="tc-avatar" style="background:#FFF3E0">👩‍🏫</div>
+        <div class="tc-name">Ibu Sari Dewi</div>
+        <div class="tc-subject">Matematika & IPA</div>
+        <div class="tc-chips"><span class="chip chip-navy">SD Kls 1-6</span><span class="chip chip-teal">Online</span><span class="chip chip-orange">Offline</span></div>
+        <div class="tc-stats">
+          <div><div class="tc-stat-val">4.9</div><div class="tc-stat-key">Rating</div></div>
+          <div><div class="tc-stat-val">124</div><div class="tc-stat-key" data-en="Students" data-id-text="Siswa">Siswa</div></div>
+          <div><div class="tc-stat-val">3th</div><div class="tc-stat-key" data-en="Exp." data-id-text="Pengalaman">Pengalaman</div></div>
+        </div>
+      </div>
+      <div class="teacher-card" onclick="openTeacherModal('Pak Budi Santoso','Bahasa Inggris','👨‍🏫','#E3F2FD','2.1 km','4.8','Rp 50–90k','89','5 tahun')">
+        <div class="tc-available"></div>
+        <div class="tc-avatar" style="background:#E3F2FD">👨‍🏫</div>
+        <div class="tc-name">Pak Budi Santoso</div>
+        <div class="tc-subject">Bahasa Inggris</div>
+        <div class="tc-chips"><span class="chip chip-navy">SD & SMP</span><span class="chip chip-teal">Online</span><span class="chip chip-orange">Offline</span></div>
+        <div class="tc-stats">
+          <div><div class="tc-stat-val">4.8</div><div class="tc-stat-key">Rating</div></div>
+          <div><div class="tc-stat-val">89</div><div class="tc-stat-key" data-en="Students" data-id-text="Siswa">Siswa</div></div>
+          <div><div class="tc-stat-val">5th</div><div class="tc-stat-key" data-en="Exp." data-id-text="Pengalaman">Pengalaman</div></div>
+        </div>
+      </div>
+      <div class="teacher-card" onclick="openTeacherModal('Bu Rina Wahyuni','B. Indonesia & IPS','👩‍💼','#E8F5E9','3.4 km','4.7','Rp 45–80k','67','2 tahun')">
+        <div class="tc-available tc-busy"></div>
+        <div class="tc-avatar" style="background:#E8F5E9">👩‍💼</div>
+        <div class="tc-name">Bu Rina Wahyuni</div>
+        <div class="tc-subject">B. Indonesia & IPS</div>
+        <div class="tc-chips"><span class="chip chip-navy">SD Kls 3-6</span><span class="chip chip-orange">Offline</span></div>
+        <div class="tc-stats">
+          <div><div class="tc-stat-val">4.7</div><div class="tc-stat-key">Rating</div></div>
+          <div><div class="tc-stat-val">67</div><div class="tc-stat-key" data-en="Students" data-id-text="Siswa">Siswa</div></div>
+          <div><div class="tc-stat-val">2th</div><div class="tc-stat-key" data-en="Exp." data-id-text="Pengalaman">Pengalaman</div></div>
+        </div>
+      </div>
+      <div class="teacher-card" onclick="openTeacherModal('Pak Ahmad Fauzi','Matematika Lanjutan','🧑‍🎓','#F3E5F5','4.0 km','5.0','Rp 80–150k','203','7 tahun')">
+        <div class="tc-available"></div>
+        <div class="tc-avatar" style="background:#F3E5F5">🧑‍🎓</div>
+        <div class="tc-name">Pak Ahmad Fauzi</div>
+        <div class="tc-subject">Matematika Lanjutan</div>
+        <div class="tc-chips"><span class="chip chip-navy">SD–SMA</span><span class="chip chip-teal">Online</span></div>
+        <div class="tc-stats">
+          <div><div class="tc-stat-val">5.0</div><div class="tc-stat-key">Rating</div></div>
+          <div><div class="tc-stat-val">203</div><div class="tc-stat-key" data-en="Students" data-id-text="Siswa">Siswa</div></div>
+          <div><div class="tc-stat-val">7th</div><div class="tc-stat-key" data-en="Exp." data-id-text="Pengalaman">Pengalaman</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="testi-section reveal">
+    <div class="tag" data-en="Testimonials" data-id-text="Testimoni">Testimoni</div>
+    <h2 class="section-title" data-en="What parents say" data-id-text="Kata orang tua mereka">Kata orang tua mereka</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text" data-en='"Finally an app where I can find a tutor who comes to our house in under 30 minutes. My son loves learning with Ibu Sari!"' data-id-text='"Akhirnya ada app yang bisa cari guru les ke rumah dalam 30 menit. Anak saya senang banget belajar sama Ibu Sari!"'>"Akhirnya ada app yang bisa cari guru les ke rumah dalam 30 menit. Anak saya senang banget belajar sama Ibu Sari!"</p>
+        <div class="testi-author"><div class="testi-avatar">👩</div><div><div class="testi-name">Ibu Dewi R.</div><div class="testi-role" data-en="Mother of Andi (Grade 4)" data-id-text="Ibu dari Andi, Kelas 4 SD">Ibu dari Andi, Kelas 4 SD</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text" data-en='"The parent monitoring feature is a game changer. I can see what my daughter learned every day without disturbing the session."' data-id-text='"Fitur pantauan orang tua luar biasa. Saya bisa lihat apa yang dipelajari anak saya setiap hari tanpa ganggu sesi belajar."'>"Fitur pantauan orang tua luar biasa. Saya bisa lihat apa yang dipelajari anak saya setiap hari tanpa ganggu sesi belajar."</p>
+        <div class="testi-author"><div class="testi-avatar">👨</div><div><div class="testi-name">Pak Hendra S.</div><div class="testi-role" data-en="Father of Nisa (Grade 2)" data-id-text="Ayah dari Nisa, Kelas 2 SD">Ayah dari Nisa, Kelas 2 SD</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text" data-en='"The price is very affordable — much cheaper than traditional tutoring centers but the quality is amazing."' data-id-text='"Harganya sangat terjangkau — jauh lebih murah dari bimbel biasa tapi kualitas gurunya luar biasa."'>"Harganya sangat terjangkau — jauh lebih murah dari bimbel biasa tapi kualitas gurunya luar biasa."</p>
+        <div class="testi-author"><div class="testi-avatar">👩</div><div><div class="testi-name">Ibu Sinta W.</div><div class="testi-role" data-en="Mother of Rafi (Grade 6)" data-id-text="Ibu dari Rafi, Kelas 6 SD">Ibu dari Rafi, Kelas 6 SD</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="pricing-section reveal">
+    <div class="section-header center">
+      <div class="tag" data-en="Pricing" data-id-text="Harga">Harga</div>
+      <h2 class="section-title" data-en="Affordable for every family" data-id-text="Terjangkau untuk semua keluarga">Terjangkau untuk semua keluarga</h2>
+      <p class="section-sub" data-en="Start free, upgrade anytime. No long-term contract." data-id-text="Mulai gratis, upgrade kapan saja. Tanpa kontrak panjang.">Mulai gratis, upgrade kapan saja. Tanpa kontrak panjang.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="price-plan" data-en="FREE" data-id-text="GRATIS">GRATIS</div>
+        <div class="price-amount">Rp 0</div>
+        <div class="price-period" data-en="forever" data-id-text="selamanya">selamanya</div>
+        <ul class="price-list">
+          <li><span class="price-check">✓</span><span data-en="3 lesson videos/month" data-id-text="3 video pelajaran/bulan">3 video pelajaran/bulan</span></li>
+          <li><span class="price-check">✓</span><span data-en="View nearby teacher profiles" data-id-text="Lihat profil guru terdekat">Lihat profil guru terdekat</span></li>
+          <li><span class="price-check">✓</span><span data-en="1 chat session with teacher" data-id-text="1 sesi chat dengan guru">1 sesi chat dengan guru</span></li>
+        </ul>
+        <button class="btn-price" onclick="goPage('waitlist')" data-en="Start Free" data-id-text="Mulai Gratis">Mulai Gratis</button>
+      </div>
+      <div class="pricing-card featured">
+        <div class="featured-flag">⭐ <span data-en="Most Popular" data-id-text="Paling Populer">Paling Populer</span></div>
+        <div class="price-plan">BELAJAR</div>
+        <div class="price-amount">Rp 99k</div>
+        <div class="price-period" data-en="/month" data-id-text="/bulan">/bulan</div>
+        <ul class="price-list">
+          <li><span class="price-check">✓</span><span data-en="Unlimited lesson videos" data-id-text="Video pelajaran tak terbatas">Video pelajaran tak terbatas</span></li>
+          <li><span class="price-check">✓</span><span data-en="4 live online sessions/month" data-id-text="4 sesi live online/bulan">4 sesi live online/bulan</span></li>
+          <li><span class="price-check">✓</span><span data-en="Priority offline teacher booking" data-id-text="Booking guru offline prioritas">Booking guru offline prioritas</span></li>
+          <li><span class="price-check">✓</span><span data-en="Parent monitoring dashboard" data-id-text="Dashboard pantau orang tua">Dashboard pantau orang tua</span></li>
+          <li><span class="price-check">✓</span><span data-en="Weekly progress reports" data-id-text="Laporan perkembangan mingguan">Laporan perkembangan mingguan</span></li>
+        </ul>
+        <button class="btn-price btn-price-featured" onclick="goPage('waitlist')" data-en="Subscribe Now" data-id-text="Mulai Berlangganan">Mulai Berlangganan</button>
+      </div>
+      <div class="pricing-card">
+        <div class="price-plan">PREMIUM</div>
+        <div class="price-amount">Rp 199k</div>
+        <div class="price-period" data-en="/month" data-id-text="/bulan">/bulan</div>
+        <ul class="price-list">
+          <li><span class="price-check">✓</span><span data-en="Everything in Belajar" data-id-text="Semua fitur Belajar">Semua fitur Belajar</span></li>
+          <li><span class="price-check">✓</span><span data-en="Unlimited offline sessions" data-id-text="Sesi offline tak terbatas">Sesi offline tak terbatas</span></li>
+          <li><span class="price-check">✓</span><span data-en="Dedicated personal teacher" data-id-text="Guru personal dedicated">Guru personal dedicated</span></li>
+          <li><span class="price-check">✓</span><span data-en="24/7 priority support" data-id-text="Prioritas support 24/7">Prioritas support 24/7</span></li>
+        </ul>
+        <button class="btn-price" onclick="goPage('waitlist')" data-en="Choose Premium" data-id-text="Pilih Premium">Pilih Premium</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BAND -->
+  <div class="cta-band reveal">
+    <div>
+      <h2 data-en="Start learning today,<br>it's free!" data-id-text="Mulai belajar hari ini,<br>gratis!">Mulai belajar hari ini,<br>gratis!</h2>
+      <p data-en="Join thousands of families in Yogyakarta who trust Learn To Learn for their children's education." data-id-text="Bergabung dengan ribuan keluarga di Yogyakarta yang sudah mempercayakan bimbingan belajar anak ke Learn To Learn.">Bergabung dengan ribuan keluarga di Yogyakarta yang sudah mempercayakan bimbingan belajar anak ke Learn To Learn.</p>
+    </div>
+    <div class="cta-btns">
+      <button class="btn btn-white" onclick="goPage('waitlist')" data-en="Join Waitlist — Free" data-id-text="Daftar Waitlist — Gratis">Daftar Waitlist — Gratis</button>
+      <button class="btn btn-outline" style="border-color:rgba(255,255,255,.5);color:#fff" onclick="goPage('find')" data-en="Become a Teacher →" data-id-text="Daftar Jadi Guru →">Daftar Jadi Guru →</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="display:inline-flex">
+          <div class="logo-box">L</div>
+          <span class="logo-name" style="color:#fff;margin-left:10px">Learn To Learn</span>
+        </div>
+        <p class="footer-tagline" data-en="Indonesia's first Gojek-style tutoring platform. Finding quality education has never been this easy." data-id-text="Platform bimbingan belajar pertama di Indonesia dengan sistem guru terdekat seperti ojek online.">Platform bimbingan belajar pertama di Indonesia dengan sistem guru terdekat seperti ojek online.</p>
+      </div>
+      <div><div class="footer-col-title" data-en="Platform" data-id-text="Platform">Platform</div>
+        <ul class="footer-links">
+          <li><a onclick="goPage('find')" data-en="Find Offline Teacher" data-id-text="Cari Guru Offline">Cari Guru Offline</a></li>
+          <li><a onclick="goPage('courses')" data-en="Online Classes" data-id-text="Kelas Online">Kelas Online</a></li>
+          <li><a onclick="goPage('dashboard')" data-en="Parent Dashboard" data-id-text="Dashboard Orang Tua">Dashboard Orang Tua</a></li>
+        </ul>
+      </div>
+      <div><div class="footer-col-title" data-en="Company" data-id-text="Perusahaan">Perusahaan</div>
+        <ul class="footer-links">
+          <li><a data-en="About Us" data-id-text="Tentang Kami">Tentang Kami</a></li>
+          <li><a data-en="Careers" data-id-text="Karier">Karier</a></li>
+          <li><a data-en="Blog" data-id-text="Blog">Blog</a></li>
+        </ul>
+      </div>
+      <div><div class="footer-col-title" data-en="Support" data-id-text="Dukungan">Dukungan</div>
+        <ul class="footer-links">
+          <li><a data-en="Help Center" data-id-text="Pusat Bantuan">Pusat Bantuan</a></li>
+          <li><a data-en="Privacy Policy" data-id-text="Kebijakan Privasi">Kebijakan Privasi</a></li>
+          <li><a data-en="Contact Us" data-id-text="Hubungi Kami">Hubungi Kami</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Learn To Learn. Made with ❤️ in Yogyakarta 🇮🇩</span>
+      <span data-en="Belajar Lebih Mudah" data-id-text="Belajar Lebih Mudah">Belajar Lebih Mudah</span>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════
+     FIND TEACHER PAGE
+══════════════════════════════════════ -->
+<div class="page find-page" id="page-find">
+  <div class="find-hero">
+    <div class="tag" data-en="Find Teacher" data-id-text="Cari Guru">Cari Guru</div>
+    <h1 data-en="Find the best teacher<br>near you" data-id-text="Temukan guru terbaik<br>di sekitar kamu">Temukan guru terbaik<br>di sekitar kamu</h1>
+    <p data-en="500+ verified teachers available in Yogyakarta" data-id-text="500+ guru terverifikasi siap mengajar di Yogyakarta">500+ guru terverifikasi siap mengajar di Yogyakarta</p>
+    <div class="search-box">
+      <input class="search-inp" type="text" placeholder="Cari mata pelajaran, nama guru..." data-placeholder-en="Search subject, teacher name..." data-placeholder-id="Cari mata pelajaran, nama guru...">
+      <select class="search-select">
+        <option data-en="All Grades" data-id-text="Semua Kelas">Semua Kelas</option>
+        <option>SD Kelas 1–3</option>
+        <option>SD Kelas 4–6</option>
+        <option>SMP</option>
+      </select>
+      <select class="search-select">
+        <option data-en="All Modes" data-id-text="Semua Mode">Semua Mode</option>
+        <option data-en="Offline (Home)" data-id-text="Offline (Rumah)">Offline (Rumah)</option>
+        <option data-en="Online" data-id-text="Online">Online</option>
+      </select>
+      <button class="search-go" data-en="🔍 Search" data-id-text="🔍 Cari">🔍 Cari</button>
+    </div>
+  </div>
+  <div class="find-body">
+    <div class="find-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label" data-en="Subject" data-id-text="Mata Pelajaran">Mata Pelajaran</div>
+        <div class="sidebar-chips">
+          <button class="sidebar-chip active" onclick="toggleSidebar(this)">Semua</button>
+          <button class="sidebar-chip" onclick="toggleSidebar(this)">Matematika</button>
+          <button class="sidebar-chip" onclick="toggleSidebar(this)">IPA</button>
+          <button class="sidebar-chip" onclick="toggleSidebar(this)">IPS</button>
+          <button class="sidebar-chip" onclick="toggleSidebar(this)">B. Indonesia</button>
+          <button class="sidebar-chip" onclick="toggleSidebar(this)">B. Inggris</button>
+          <button class="sidebar-chip" onclick="toggleSidebar(this)">PAI</button>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label" data-en="Mode" data-id-text="Mode Belajar">Mode Belajar</div>
+        <div class="sidebar-chips">
+          <button class="sidebar-chip active" onclick="toggleSidebar(this)">Semua</button>
+          <button class="sidebar-chip" onclick="toggleSidebar(this)">Offline</button>
+          <button class="sidebar-chip" onclick="toggleSidebar(this)">Online</button>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label" data-en="Availability" data-id-text="Ketersediaan">Ketersediaan</div>
+        <div class="sidebar-chips">
+          <button class="sidebar-chip" onclick="toggleSidebar(this)">Sekarang</button>
+          <button class="sidebar-chip" onclick="toggleSidebar(this)">Hari Ini</button>
+          <button class="sidebar-chip" onclick="toggleSidebar(this)">Minggu Ini</button>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label" data-en="Rating" data-id-text="Rating">Rating</div>
+        <div class="sidebar-chips">
+          <button class="sidebar-chip" onclick="toggleSidebar(this)">⭐ 4.5+</button>
+          <button class="sidebar-chip" onclick="toggleSidebar(this)">⭐ 4.0+</button>
+          <button class="sidebar-chip" onclick="toggleSidebar(this)">Semua</button>
+        </div>
+      </div>
+    </div>
+    <div class="find-results">
+      <div class="results-header">
+        <div class="results-count">Menampilkan <strong>24 guru</strong> di Yogyakarta</div>
+        <select class="sort-select"><option>Terdekat</option><option>Rating Tertinggi</option><option>Harga Terendah</option></select>
+      </div>
+      <div class="results-grid">
+        <div class="result-card" onclick="openTeacherModal('Ibu Sari Dewi','Matematika & IPA','👩‍🏫','#FFF3E0','1.2 km','4.9','Rp 60–100k','124','3 tahun')">
+          <div class="rc-avatar" style="background:#FFF3E0">👩‍🏫</div>
+          <div class="rc-info">
+            <div class="rc-name">Ibu Sari Dewi</div>
+            <div class="rc-subject">Matematika & IPA · SD Kelas 1-6</div>
+            <div class="rc-chips"><span class="chip chip-teal">Tersedia</span><span class="chip chip-orange">Offline</span><span class="chip chip-navy">Online</span></div>
+            <div class="rc-bottom"><div class="rc-price">Rp 60k <span>/sesi</span></div><div style="display:flex;gap:8px;align-items:center"><div class="rc-rating">⭐ 4.9</div><div class="rc-dist">1.2 km</div></div></div>
+          </div>
+        </div>
+        <div class="result-card" onclick="openTeacherModal('Pak Budi Santoso','Bahasa Inggris','👨‍🏫','#E3F2FD','2.1 km','4.8','Rp 50–90k','89','5 tahun')">
+          <div class="rc-avatar" style="background:#E3F2FD">👨‍🏫</div>
+          <div class="rc-info">
+            <div class="rc-name">Pak Budi Santoso</div>
+            <div class="rc-subject">Bahasa Inggris · SD & SMP</div>
+            <div class="rc-chips"><span class="chip chip-teal">Tersedia</span><span class="chip chip-orange">Offline</span><span class="chip chip-navy">Online</span></div>
+            <div class="rc-bottom"><div class="rc-price">Rp 50k <span>/sesi</span></div><div style="display:flex;gap:8px;align-items:center"><div class="rc-rating">⭐ 4.8</div><div class="rc-dist">2.1 km</div></div></div>
+          </div>
+        </div>
+        <div class="result-card" onclick="openTeacherModal('Bu Rina Wahyuni','B. Indonesia & IPS','👩‍💼','#E8F5E9','3.4 km','4.7','Rp 45–80k','67','2 tahun')">
+          <div class="rc-avatar" style="background:#E8F5E9">👩‍💼</div>
+          <div class="rc-info">
+            <div class="rc-name">Bu Rina Wahyuni</div>
+            <div class="rc-subject">B. Indonesia & IPS · SD</div>
+            <div class="rc-chips"><span class="chip chip-yellow">Sibuk</span><span class="chip chip-orange">Offline</span></div>
+            <div class="rc-bottom"><div class="rc-price">Rp 45k <span>/sesi</span></div><div style="display:flex;gap:8px;align-items:center"><div class="rc-rating">⭐ 4.7</div><div class="rc-dist">3.4 km</div></div></div>
+          </div>
+        </div>
+        <div class="result-card" onclick="openTeacherModal('Pak Ahmad Fauzi','Matematika Lanjutan','🧑‍🎓','#F3E5F5','4.0 km','5.0','Rp 80–150k','203','7 tahun')">
+          <div class="rc-avatar" style="background:#F3E5F5">🧑‍🎓</div>
+          <div class="rc-info">
+            <div class="rc-name">Pak Ahmad Fauzi</div>
+            <div class="rc-subject">Matematika Lanjutan · SD–SMA</div>
+            <div class="rc-chips"><span class="chip chip-teal">Tersedia</span><span class="chip chip-navy">Online</span></div>
+            <div class="rc-bottom"><div class="rc-price">Rp 80k <span>/sesi</span></div><div style="display:flex;gap:8px;align-items:center"><div class="rc-rating">⭐ 5.0</div><div class="rc-dist">4.0 km</div></div></div>
+          </div>
+        </div>
+        <div class="result-card" onclick="openTeacherModal('Ibu Maya Putri','IPA & Matematika','👩‍🔬','#E1F5FE','1.8 km','4.6','Rp 55–85k','52','1 tahun')">
+          <div class="rc-avatar" style="background:#E1F5FE">👩‍🔬</div>
+          <div class="rc-info">
+            <div class="rc-name">Ibu Maya Putri</div>
+            <div class="rc-subject">IPA & Matematika · SD Kelas 4-6</div>
+            <div class="rc-chips"><span class="chip chip-teal">Tersedia</span><span class="chip chip-orange">Offline</span></div>
+            <div class="rc-bottom"><div class="rc-price">Rp 55k <span>/sesi</span></div><div style="display:flex;gap:8px;align-items:center"><div class="rc-rating">⭐ 4.6</div><div class="rc-dist">1.8 km</div></div></div>
+          </div>
+        </div>
+        <div class="result-card" onclick="openTeacherModal('Pak Doni Prasetyo','B. Inggris & B. Indonesia','👨‍💼','#FFF9C4','2.6 km','4.9','Rp 65–95k','118','4 tahun')">
+          <div class="rc-avatar" style="background:#FFF9C4">👨‍💼</div>
+          <div class="rc-info">
+            <div class="rc-name">Pak Doni Prasetyo</div>
+            <div class="rc-subject">B. Inggris & B. Indonesia · SD</div>
+            <div class="rc-chips"><span class="chip chip-teal">Tersedia</span><span class="chip chip-orange">Offline</span><span class="chip chip-navy">Online</span></div>
+            <div class="rc-bottom"><div class="rc-price">Rp 65k <span>/sesi</span></div><div style="display:flex;gap:8px;align-items:center"><div class="rc-rating">⭐ 4.9</div><div class="rc-dist">2.6 km</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     DASHBOARD PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-dashboard">
+  <div class="dashboard">
+    <div class="dash-sidebar">
+      <div class="dash-profile">
+        <div class="dash-avatar">👩</div>
+        <div class="dash-name">Ibu Dewi R.</div>
+        <div class="dash-role" data-en="Parent Account" data-id-text="Akun Orang Tua">Akun Orang Tua</div>
+      </div>
+      <ul class="dash-nav">
+        <li class="active"><span class="nav-icon">📊</span><span data-en="Overview" data-id-text="Ringkasan">Ringkasan</span></li>
+        <li><span class="nav-icon">👦</span><span data-en="My Children" data-id-text="Anak Saya">Anak Saya</span></li>
+        <li><span class="nav-icon">📅</span><span data-en="Schedule" data-id-text="Jadwal">Jadwal</span></li>
+        <li><span class="nav-icon">📚</span><span data-en="Courses" data-id-text="Kelas">Kelas</span></li>
+        <li><span class="nav-icon">👩‍🏫</span><span data-en="My Teachers" data-id-text="Guru Saya">Guru Saya</span></li>
+        <li><span class="nav-icon">💳</span><span data-en="Billing" data-id-text="Pembayaran">Pembayaran</span></li>
+        <li><span class="nav-icon">⚙️</span><span data-en="Settings" data-id-text="Pengaturan">Pengaturan</span></li>
+      </ul>
+    </div>
+    <div class="dash-body">
+      <div class="dash-topbar">
+        <div class="dash-greeting">
+          <h2 data-en="Good morning, Ibu Dewi! 👋" data-id-text="Selamat pagi, Ibu Dewi! 👋">Selamat pagi, Ibu Dewi! 👋</h2>
+          <p data-en="Here's an overview of your children's learning progress today" data-id-text="Berikut ringkasan progress belajar anak-anak hari ini">Berikut ringkasan progress belajar anak-anak hari ini</p>
+        </div>
+        <div class="dash-actions">
+          <button class="btn btn-outline btn-sm" onclick="goPage('find')" data-en="+ Book Teacher" data-id-text="+ Pesan Guru">+ Pesan Guru</button>
+          <button class="btn btn-primary btn-sm" onclick="goPage('courses')" data-en="📚 Courses" data-id-text="📚 Lihat Kelas">📚 Lihat Kelas</button>
+        </div>
+      </div>
+
+      <div class="dash-stats-row">
+        <div class="dash-stat">
+          <div class="dash-stat-icon" style="background:rgba(244,81,30,.1)">📅</div>
+          <div class="dash-stat-val">12</div>
+          <div class="dash-stat-label" data-en="Sessions This Month" data-id-text="Sesi Bulan Ini">Sesi Bulan Ini</div>
+          <div class="dash-stat-delta delta-up">↑ +3 dari bulan lalu</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-icon" style="background:rgba(0,191,165,.1)">⏱️</div>
+          <div class="dash-stat-val">18h</div>
+          <div class="dash-stat-label" data-en="Learning Hours" data-id-text="Jam Belajar">Jam Belajar</div>
+          <div class="dash-stat-delta delta-up">↑ +5h minggu ini</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-icon" style="background:rgba(255,214,0,.15)">⭐</div>
+          <div class="dash-stat-val">85</div>
+          <div class="dash-stat-label" data-en="Avg. Score" data-id-text="Nilai Rata-rata">Nilai Rata-rata</div>
+          <div class="dash-stat-delta delta-up">↑ +7 poin</div>
+        </div>
+        <div class="dash-stat">
+          <div class="dash-stat-icon" style="background:rgba(14,30,53,.07)">🏆</div>
+          <div class="dash-stat-val">6</div>
+          <div class="dash-stat-label" data-en="Badges Earned" data-id-text="Badge Diraih">Badge Diraih</div>
+          <div class="dash-stat-delta delta-up">↑ 2 baru minggu ini</div>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <!-- Progress card -->
+        <div class="dash-card">
+          <div class="dash-card-title"><span data-en="📊 Subject Progress — Andi" data-id-text="📊 Progress Pelajaran — Andi">📊 Progress Pelajaran — Andi</span><a data-en="See all" data-id-text="Lihat semua">Lihat semua</a></div>
+          <div class="progress-item">
+            <div class="progress-label-row"><div class="progress-subject">🔢 Matematika</div><div class="progress-pct">82%</div></div>
+            <div class="progress-track"><div class="progress-bar" style="width:82%;background:var(--orange)"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-label-row"><div class="progress-subject">🔬 IPA</div><div class="progress-pct">75%</div></div>
+            <div class="progress-track"><div class="progress-bar" style="width:75%;background:var(--teal)"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-label-row"><div class="progress-subject">🇬🇧 Bahasa Inggris</div><div class="progress-pct">90%</div></div>
+            <div class="progress-track"><div class="progress-bar" style="width:90%;background:var(--yellow)"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-label-row"><div class="progress-subject">📖 B. Indonesia</div><div class="progress-pct">68%</div></div>
+            <div class="progress-track"><div class="progress-bar" style="width:68%;background:#7C4DFF"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-label-row"><div class="progress-subject">🌏 IPS</div><div class="progress-pct">71%</div></div>
+            <div class="progress-track"><div class="progress-bar" style="width:71%;background:var(--navy2)"></div></div>
+          </div>
+        </div>
+        <!-- Children -->
+        <div class="dash-card">
+          <div class="dash-card-title"><span data-en="👦 My Children" data-id-text="👦 Anak Saya">👦 Anak Saya</span><a onclick="goPage('find')" data-en="+ Add session" data-id-text="+ Tambah sesi">+ Tambah sesi</a></div>
+          <div class="child-card">
+            <div class="child-avatar">👦</div>
+            <div><div class="child-name">Andi Prasetyo</div><div class="child-grade">Kelas 4 SD · Sesi minggu ini: 3</div></div>
+            <div class="child-score"><div class="child-score-val">82</div><div class="child-score-lbl">avg score</div></div>
+          </div>
+          <div class="child-card">
+            <div class="child-avatar">👧</div>
+            <div><div class="child-name">Nisa Dewi</div><div class="child-grade">Kelas 2 SD · Sesi minggu ini: 2</div></div>
+            <div class="child-score"><div class="child-score-val">91</div><div class="child-score-lbl">avg score</div></div>
+          </div>
+          <button class="btn btn-outline btn-sm" style="width:100%;margin-top:12px;justify-content:center" onclick="goPage('find')">+ Jadwalkan Sesi Baru</button>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <!-- Schedule -->
+        <div class="dash-card">
+          <div class="dash-card-title"><span data-en="📅 Upcoming Sessions" data-id-text="📅 Sesi Mendatang">📅 Sesi Mendatang</span><a data-en="See all" data-id-text="Lihat semua">Lihat semua</a></div>
+          <div class="schedule-item">
+            <div class="sched-time"><div class="sched-hour">15:00</div><div class="sched-min">Hari ini</div></div>
+            <div class="sched-divider"></div>
+            <div class="sched-info"><div class="sched-subject">Matematika — Andi</div><div class="sched-teacher">Ibu Sari Dewi · Offline</div></div>
+            <div class="sched-tag"><span class="chip chip-orange">Hari ini</span></div>
+          </div>
+          <div class="schedule-item">
+            <div class="sched-time"><div class="sched-hour">09:00</div><div class="sched-min">Besok</div></div>
+            <div class="sched-divider"></div>
+            <div class="sched-info"><div class="sched-subject">B. Inggris — Nisa</div><div class="sched-teacher">Pak Budi Santoso · Online</div></div>
+            <div class="sched-tag"><span class="chip chip-navy">Besok</span></div>
+          </div>
+          <div class="schedule-item">
+            <div class="sched-time"><div class="sched-hour">16:00</div><div class="sched-min">Kamis</div></div>
+            <div class="sched-divider"></div>
+            <div class="sched-info"><div class="sched-subject">IPA — Andi</div><div class="sched-teacher">Ibu Sari Dewi · Offline</div></div>
+            <div class="sched-tag"><span class="chip chip-teal">Kamis</span></div>
+          </div>
+        </div>
+        <!-- Activity -->
+        <div class="dash-card">
+          <div class="dash-card-title"><span data-en="⚡ Recent Activity" data-id-text="⚡ Aktivitas Terbaru">⚡ Aktivitas Terbaru</span></div>
+          <div class="activity-item">
+            <div class="act-icon" style="background:rgba(0,191,165,.1)">🏆</div>
+            <div class="act-content"><div class="act-title">Andi mendapat badge "Matematika Master"</div><div class="act-time">2 jam lalu</div><span class="act-badge chip chip-teal">Achievement</span></div>
+          </div>
+          <div class="activity-item">
+            <div class="act-icon" style="background:rgba(244,81,30,.1)">📝</div>
+            <div class="act-content"><div class="act-title">Sesi IPA Andi selesai — 90 menit</div><div class="act-time">Kemarin, 15:30</div><span class="act-badge chip chip-orange">Selesai</span></div>
+          </div>
+          <div class="activity-item">
+            <div class="act-icon" style="background:rgba(255,214,0,.15)">⭐</div>
+            <div class="act-content"><div class="act-title">Nisa menyelesaikan kuis B. Inggris: 95/100</div><div class="act-time">Kemarin, 10:00</div><span class="act-badge chip chip-yellow">Nilai Tinggi</span></div>
+          </div>
+          <div class="activity-item">
+            <div class="act-icon" style="background:rgba(14,30,53,.07)">📋</div>
+            <div class="act-content"><div class="act-title">Laporan mingguan tersedia</div><div class="act-time">Senin lalu</div><span class="act-badge chip chip-navy">Laporan</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     COURSES PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-courses">
+  <div class="courses-hero">
+    <div class="tag" data-en="Online Courses" data-id-text="Kelas Online">Kelas Online</div>
+    <h1 data-en="Learn at your own pace,<br>anytime anywhere" data-id-text="Belajar sesuai ritmu,<br>kapan saja di mana saja">Belajar sesuai ritmu,<br>kapan saja di mana saja</h1>
+    <p data-en="200+ interactive video courses aligned with the national SD curriculum" data-id-text="200+ video pelajaran interaktif sesuai kurikulum SD nasional">200+ video pelajaran interaktif sesuai kurikulum SD nasional</p>
+    <div class="courses-filters">
+      <span class="chip chip-teal">✓ Kurikulum Merdeka Belajar</span>
+      <span class="chip" style="background:rgba(255,255,255,.15);color:#fff">📱 Bisa di HP & Laptop</span>
+      <span class="chip" style="background:rgba(255,255,255,.15);color:#fff">🔁 Bisa Diulang Kapan Saja</span>
+    </div>
+  </div>
+  <div class="courses-body">
+    <!-- Featured -->
+    <div class="featured-course">
+      <div>
+        <div class="fc-tag">🔥 Sedang Populer</div>
+        <div class="fc-title">Matematika Dasar — Perkalian & Pembagian</div>
+        <div class="fc-desc">Kuasai perkalian dan pembagian dengan cara yang menyenangkan. Cocok untuk kelas 3–4 SD.</div>
+        <div class="fc-meta">
+          <div class="fc-meta-item">📹 12 Video</div>
+          <div class="fc-meta-item">⏱️ 3.5 Jam</div>
+          <div class="fc-meta-item">⭐ 4.9 (324 siswa)</div>
+          <div class="fc-meta-item">🎓 Kelas 3–4 SD</div>
+        </div>
+        <button class="btn btn-white" style="margin-top:20px;color:var(--navy)">▶ Lanjutkan Belajar</button>
+      </div>
+      <div class="fc-right">
+        <div class="fc-progress-circle">
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="10"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="var(--orange)" stroke-width="10" stroke-dasharray="251" stroke-dashoffset="75" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+          </svg>
+          <div class="fc-pct">70%</div>
+        </div>
+        <div style="color:rgba(255,255,255,.5);font-size:12px">Progress kamu</div>
+      </div>
+    </div>
+
+    <!-- Subject nav -->
+    <div class="courses-subject-nav">
+      <button class="subj-pill active" onclick="toggleSubjPill(this)">📚 Semua</button>
+      <button class="subj-pill" onclick="toggleSubjPill(this)">🔢 Matematika</button>
+      <button class="subj-pill" onclick="toggleSubjPill(this)">🔬 IPA</button>
+      <button class="subj-pill" onclick="toggleSubjPill(this)">📖 B. Indonesia</button>
+      <button class="subj-pill" onclick="toggleSubjPill(this)">🇬🇧 B. Inggris</button>
+      <button class="subj-pill" onclick="toggleSubjPill(this)">🎵 Musik</button>
+      <button class="subj-pill" onclick="toggleSubjPill(this)">🎨 Seni & Hobi</button>
+      <button class="subj-pill" onclick="toggleSubjPill(this)">💻 Teknologi</button>
+    </div>
+
+    <div class="courses-grid">
+      <div class="course-card">
+        <div class="course-thumb" style="background:linear-gradient(135deg,#FFF3E0,#FFE0B2)"><span>🔢</span><span class="course-thumb-badge chip chip-orange">Populer</span></div>
+        <div class="course-body">
+          <div class="course-title">Matematika Kelas 1 — Dasar</div>
+          <div class="course-subject">🔢 Matematika · Kelas 1 SD</div>
+          <div class="course-meta"><div class="course-lessons">📹 8 video · 2 jam</div><div class="rc-rating">⭐ 4.8</div></div>
+          <div class="course-progress-row"><div class="course-prog-label"><span>Progress</span><span>100%</span></div><div class="course-prog-bar"><div class="course-prog-fill" style="width:100%"></div></div></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-thumb" style="background:linear-gradient(135deg,#E3F2FD,#BBDEFB)"><span>🔬</span><span class="course-thumb-badge chip chip-teal">Baru</span></div>
+        <div class="course-body">
+          <div class="course-title">IPA — Tumbuhan & Hewan</div>
+          <div class="course-subject">🔬 IPA · Kelas 3 SD</div>
+          <div class="course-meta"><div class="course-lessons">📹 10 video · 2.5 jam</div><div class="rc-rating">⭐ 4.9</div></div>
+          <div class="course-progress-row"><div class="course-prog-label"><span>Progress</span><span>60%</span></div><div class="course-prog-bar"><div class="course-prog-fill" style="width:60%"></div></div></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-thumb" style="background:linear-gradient(135deg,#E8F5E9,#C8E6C9)"><span>🇬🇧</span></div>
+        <div class="course-body">
+          <div class="course-title">Bahasa Inggris Dasar</div>
+          <div class="course-subject">🇬🇧 B. Inggris · Kelas 1–2 SD</div>
+          <div class="course-meta"><div class="course-lessons">📹 15 video · 4 jam</div><div class="rc-rating">⭐ 4.9</div></div>
+          <div class="course-progress-row"><div class="course-prog-label"><span>Progress</span><span>30%</span></div><div class="course-prog-bar"><div class="course-prog-fill" style="width:30%"></div></div></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-thumb" style="background:linear-gradient(135deg,#F3E5F5,#E1BEE7)"><span>📖</span></div>
+        <div class="course-body">
+          <div class="course-title">Membaca & Menulis Kelas 1</div>
+          <div class="course-subject">📖 B. Indonesia · Kelas 1 SD</div>
+          <div class="course-meta"><div class="course-lessons">📹 12 video · 3 jam</div><div class="rc-rating">⭐ 4.7</div></div>
+          <div class="course-progress-row"><div class="course-prog-label"><span>Progress</span><span>0%</span></div><div class="course-prog-bar"><div class="course-prog-fill" style="width:0%"></div></div></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-thumb" style="background:linear-gradient(135deg,#FFF9C4,#FFF176)"><span>🌏</span><span class="course-thumb-badge chip chip-navy">Live</span></div>
+        <div class="course-body">
+          <div class="course-title">IPS — Lingkungan Kita</div>
+          <div class="course-subject">🌏 IPS · Kelas 3 SD</div>
+          <div class="course-meta"><div class="course-lessons">📹 9 video · 2 jam</div><div class="rc-rating">⭐ 4.6</div></div>
+          <div class="course-progress-row"><div class="course-prog-label"><span>Progress</span><span>45%</span></div><div class="course-prog-bar"><div class="course-prog-fill" style="width:45%"></div></div></div>
+        </div>
+      </div>
+      <div class="course-card">
+        <div class="course-thumb" style="background:linear-gradient(135deg,#FCE4EC,#F8BBD0)"><span>🧮</span><span class="course-thumb-badge chip chip-orange">Olimpiade</span></div>
+        <div class="course-body">
+          <div class="course-title">Matematika Olimpiade SD</div>
+          <div class="course-subject">🧮 Matematika · Kelas 4–6 SD</div>
+          <div class="course-meta"><div class="course-lessons">📹 20 video · 6 jam</div><div class="rc-rating">⭐ 5.0</div></div>
+          <div class="course-progress-row"><div class="course-prog-label"><span>Progress</span><span>0%</span></div><div class="course-prog-bar"><div class="course-prog-fill" style="width:0%"></div></div></div>
+        </div>
+      </div>
+
+      <!-- Music & Hobby Section -->
+      <div style="margin-top:48px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
+          <div>
+            <div class="tag">🎵 Musik & Hobi</div>
+            <h3 style="font-family:'Syne',sans-serif;font-size:26px;color:var(--navy);letter-spacing:-0.5px" data-en="Learn music, arts & skills" data-id-text="Belajar musik, seni & keahlian">Belajar musik, seni & keahlian</h3>
+          </div>
+          <span class="chip chip-orange" data-en="🆕 New Category!" data-id-text="🆕 Kategori Baru!">🆕 Kategori Baru!</span>
+        </div>
+
+        <div style="background:linear-gradient(135deg,#1A3050,#0E1E35);border-radius:22px;padding:24px 28px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+          <div>
+            <div style="font-size:12px;color:rgba(255,255,255,.5);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px" data-en="Coming soon" data-id-text="Segera hadir">Segera hadir</div>
+            <div style="font-size:20px;color:#fff;font-family:'Syne',sans-serif;letter-spacing:-0.3px;margin-bottom:6px" data-en="100+ music, arts & hobby courses launching soon!" data-id-text="100+ kursus musik, seni & hobi segera hadir!">100+ kursus musik, seni & hobi segera hadir!</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.5)" data-en="Piano, guitar, drawing, photography, cooking, and more. Be the first to know!" data-id-text="Piano, gitar, menggambar, fotografi, memasak, dan banyak lagi. Jadilah yang pertama tahu!">Piano, gitar, menggambar, fotografi, memasak, dan banyak lagi.</div>
+          </div>
+          <button class="btn btn-primary" onclick="goPage('waitlist')" data-en="🔔 Notify Me" data-id-text="🔔 Beritahu Saya">🔔 Beritahu Saya</button>
+        </div>
+
+        <div class="courses-grid">
+          <div class="course-card">
+            <div class="course-thumb" style="background:linear-gradient(135deg,#F3E5F5,#CE93D8)"><span>🎹</span><span class="course-thumb-badge chip chip-navy">Segera</span></div>
+            <div class="course-body">
+              <div class="course-title">Piano untuk Pemula</div>
+              <div class="course-subject">🎹 Piano · Semua Usia</div>
+              <div class="course-meta"><div class="course-lessons">📹 16 video · 5 jam</div><div style="font-size:12px;color:var(--gray3)">Segera hadir</div></div>
+            </div>
+          </div>
+          <div class="course-card">
+            <div class="course-thumb" style="background:linear-gradient(135deg,#E8F5E9,#A5D6A7)"><span>🎸</span><span class="course-thumb-badge chip chip-navy">Segera</span></div>
+            <div class="course-body">
+              <div class="course-title">Gitar Akustik — Dari Nol</div>
+              <div class="course-subject">🎸 Gitar · Remaja & Dewasa</div>
+              <div class="course-meta"><div class="course-lessons">📹 20 video · 6 jam</div><div style="font-size:12px;color:var(--gray3)">Segera hadir</div></div>
+            </div>
+          </div>
+          <div class="course-card">
+            <div class="course-thumb" style="background:linear-gradient(135deg,#FFF3E0,#FFCC80)"><span>🎨</span><span class="course-thumb-badge chip chip-navy">Segera</span></div>
+            <div class="course-body">
+              <div class="course-title">Menggambar untuk Anak</div>
+              <div class="course-subject">🎨 Seni · Anak SD</div>
+              <div class="course-meta"><div class="course-lessons">📹 12 video · 3.5 jam</div><div style="font-size:12px;color:var(--gray3)">Segera hadir</div></div>
+            </div>
+          </div>
+          <div class="course-card">
+            <div class="course-thumb" style="background:linear-gradient(135deg,#E3F2FD,#90CAF9)"><span>📸</span><span class="course-thumb-badge chip chip-navy">Segera</span></div>
+            <div class="course-body">
+              <div class="course-title">Fotografi HP untuk Pemula</div>
+              <div class="course-subject">📸 Fotografi · Remaja & Dewasa</div>
+              <div class="course-meta"><div class="course-lessons">📹 10 video · 3 jam</div><div style="font-size:12px;color:var(--gray3)">Segera hadir</div></div>
+            </div>
+          </div>
+          <div class="course-card">
+            <div class="course-thumb" style="background:linear-gradient(135deg,#FCE4EC,#F48FB1)"><span>🍳</span><span class="course-thumb-badge chip chip-navy">Segera</span></div>
+            <div class="course-body">
+              <div class="course-title">Baking & Kue untuk Pemula</div>
+              <div class="course-subject">🍳 Memasak · Semua Usia</div>
+              <div class="course-meta"><div class="course-lessons">📹 14 video · 4 jam</div><div style="font-size:12px;color:var(--gray3)">Segera hadir</div></div>
+            </div>
+          </div>
+          <div class="course-card">
+            <div class="course-thumb" style="background:linear-gradient(135deg,#E0F2F1,#80CBC4)"><span>🎤</span><span class="course-thumb-badge chip chip-navy">Segera</span></div>
+            <div class="course-body">
+              <div class="course-title">Vokal & Teknik Bernyanyi</div>
+              <div class="course-subject">🎤 Vokal · Remaja & Dewasa</div>
+              <div class="course-meta"><div class="course-lessons">📹 18 video · 5.5 jam</div><div style="font-size:12px;color:var(--gray3)">Segera hadir</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     WAITLIST PAGE
+══════════════════════════════════════ -->
+<div class="page" id="page-waitlist">
+  <div class="waitlist-page">
+    <div class="waitlist-left">
+      <div class="tag" data-en="Early Access" data-id-text="Akses Awal">Akses Awal</div>
+      <h1>Jadilah yang <span>Pertama</span><br>Mencoba!</h1>
+      <p data-en="Learn To Learn is launching soon in Yogyakarta. Join the waitlist now and get 3 months free when we go live." data-id-text="Learn To Learn segera hadir di Yogyakarta. Daftar waitlist sekarang dan dapatkan 3 bulan gratis saat kami launching.">Learn To Learn segera hadir di Yogyakarta. Daftar waitlist sekarang dan dapatkan 3 bulan gratis saat kami launching.</p>
+      <div class="waitlist-perks">
+        <div class="perk-item"><div class="perk-icon">🎁</div><div class="perk-text"><strong data-en="3 Months Free" data-id-text="3 Bulan Gratis">3 Bulan Gratis</strong><span data-en="Free subscription for the first 100 sign-ups" data-id-text="Berlangganan gratis untuk 100 pendaftar pertama">Berlangganan gratis untuk 100 pendaftar pertama</span></div></div>
+        <div class="perk-item"><div class="perk-icon">⚡</div><div class="perk-text"><strong data-en="Priority Access" data-id-text="Akses Prioritas">Akses Prioritas</strong><span data-en="Be the first to use the app before public launch" data-id-text="Jadilah yang pertama pakai sebelum peluncuran resmi">Jadilah yang pertama pakai sebelum peluncuran resmi</span></div></div>
+        <div class="perk-item"><div class="perk-icon">💬</div><div class="perk-text"><strong data-en="Help Shape the Product" data-id-text="Ikut Bentuk Produk">Ikut Bentuk Produk</strong><span data-en="Your feedback will directly influence our features" data-id-text="Masukan kamu langsung mempengaruhi fitur yang kami buat">Masukan kamu langsung mempengaruhi fitur yang kami buat</span></div></div>
+      </div>
+      <div class="waitlist-count">
+        <div class="wc-avatars"><div class="wc-av">👩</div><div class="wc-av">👨</div><div class="wc-av">👩</div><div class="wc-av">👨</div><div class="wc-av">👩</div></div>
+        <div class="wc-num" style="margin-top:14px" id="wlCount">247</div>
+        <div class="wc-label" data-en="people already on the waitlist" data-id-text="orang sudah di waitlist">orang sudah di waitlist</div>
+      </div>
+    </div>
+    <div class="waitlist-right">
+      <div class="wl-form-area" id="wlFormArea">
+        <h2 class="wl-form-title" data-en="Join the Waitlist" data-id-text="Daftar Waitlist">Daftar Waitlist</h2>
+        <p class="wl-form-sub" data-en="Fill in your details below. Takes less than 1 minute." data-id-text="Isi data kamu di bawah ini. Kurang dari 1 menit.">Isi data kamu di bawah ini. Kurang dari 1 menit.</p>
+        <div class="wl-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" data-en="Full Name" data-id-text="Nama Lengkap">Nama Lengkap</label>
+              <input class="form-input" type="text" id="wlName" placeholder="Contoh: Ibu Sari" data-placeholder-en="Ex: Mrs. Sarah" data-placeholder-id="Contoh: Ibu Sari">
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-en="WhatsApp Number" data-id-text="No. WhatsApp">No. WhatsApp</label>
+              <input class="form-input" type="tel" id="wlPhone" placeholder="08xx-xxxx-xxxx">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-en="Email Address" data-id-text="Alamat Email">Alamat Email</label>
+            <input class="form-input" type="email" id="wlEmail" placeholder="email@kamu.com" data-placeholder-en="your@email.com" data-placeholder-id="email@kamu.com">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" data-en="I am a..." data-id-text="Saya adalah...">Saya adalah...</label>
+              <select class="form-select" id="wlRole">
+                <option value="parent" data-en="Parent / Guardian" data-id-text="Orang Tua / Wali">Orang Tua / Wali</option>
+                <option value="student" data-en="Student" data-id-text="Siswa">Siswa</option>
+                <option value="teacher" data-en="Teacher (want to join)" data-id-text="Guru (ingin bergabung)">Guru (ingin bergabung)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" data-en="City" data-id-text="Kota">Kota</label>
+              <select class="form-select" id="wlCity">
+                <option data-en="Yogyakarta" data-id-text="Yogyakarta">Yogyakarta</option>
+                <option data-en="Sleman" data-id-text="Sleman">Sleman</option>
+                <option data-en="Bantul" data-id-text="Bantul">Bantul</option>
+                <option data-en="Gunung Kidul" data-id-text="Gunung Kidul">Gunung Kidul</option>
+                <option data-en="Kulon Progo" data-id-text="Kulon Progo">Kulon Progo</option>
+                <option data-en="Other" data-id-text="Kota Lain">Kota Lain</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-en="What subjects do you need? (Optional)" data-id-text="Pelajaran apa yang dibutuhkan? (Opsional)">Pelajaran apa yang dibutuhkan? (Opsional)</label>
+            <input class="form-input" type="text" placeholder="Contoh: Matematika, IPA, Bahasa Inggris" data-placeholder-en="Ex: Math, Science, English" data-placeholder-id="Contoh: Matematika, IPA, Bahasa Inggris">
+          </div>
+          <div class="form-checkbox-row">
+            <input type="checkbox" class="form-checkbox" id="wlAgree" checked>
+            <label class="form-checkbox-label" for="wlAgree" data-en="I agree to receive updates about Learn To Learn via WhatsApp & email." data-id-text="Saya setuju menerima update tentang Learn To Learn via WhatsApp & email.">Saya setuju menerima update tentang Learn To Learn via WhatsApp & email.</label>
+          </div>
+          <button class="btn-submit" onclick="submitWaitlist()" data-en="🚀 Join Waitlist Now" data-id-text="🚀 Daftar Waitlist Sekarang">🚀 Daftar Waitlist Sekarang</button>
+          <p class="form-note" data-en="Your data is safe and will never be shared with third parties. 🔒" data-id-text="Data kamu aman dan tidak akan pernah dibagikan ke pihak ketiga. 🔒">Data kamu aman dan tidak akan pernah dibagikan ke pihak ketiga. 🔒</p>
+        </div>
+      </div>
+      <!-- Success -->
+      <div class="wl-success" id="wlSuccess">
+        <div class="success-icon">🎉</div>
+        <h2 class="success-title" data-en="You're on the list!" data-id-text="Kamu sudah terdaftar!">Kamu sudah terdaftar!</h2>
+        <p class="success-sub" id="successMsg" data-en="Thanks! We'll notify you via WhatsApp when Learn To Learn launches in Yogyakarta." data-id-text="Terima kasih! Kami akan menghubungi kamu via WhatsApp saat Learn To Learn hadir di Yogyakarta.">Terima kasih! Kami akan menghubungi kamu via WhatsApp saat Learn To Learn hadir di Yogyakarta.</p>
+        <div class="success-num" id="successNum">248</div>
+        <div class="success-num-label" data-en="people on the waitlist including you 🎊" data-id-text="orang di waitlist termasuk kamu 🎊">orang di waitlist termasuk kamu 🎊</div>
+        <div style="margin-top:28px;display:flex;gap:12px;justify-content:center">
+          <button class="btn btn-primary" onclick="goPage('home')" data-en="← Back to Home" data-id-text="← Kembali ke Beranda">← Kembali ke Beranda</button>
+          <button class="btn btn-outline" onclick="shareTo()" data-en="📢 Share with Friends" data-id-text="📢 Share ke Teman">📢 Share ke Teman</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TEACHER MODAL ══ -->
+<div class="modal-overlay" id="teacherModal" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-teacher-top">
+      <div class="modal-av" id="mav"></div>
+      <div>
+        <div class="modal-teacher-name" id="mname"></div>
+        <div class="modal-teacher-subj" id="msubj"></div>
+        <span class="chip chip-teal" style="margin-top:6px">● <span data-en="Available Now" data-id-text="Tersedia Sekarang">Tersedia Sekarang</span></span>
+      </div>
+    </div>
+    <div class="modal-grid">
+      <div class="modal-item"><div class="modal-item-label" data-en="Distance" data-id-text="Jarak">Jarak</div><div class="modal-item-val" id="mdist"></div></div>
+      <div class="modal-item"><div class="modal-item-label">Rating</div><div class="modal-item-val" id="mrating"></div></div>
+      <div class="modal-item"><div class="modal-item-label" data-en="Fee/Session" data-id-text="Tarif/Sesi">Tarif/Sesi</div><div class="modal-item-val" id="mprice"></div></div>
+      <div class="modal-item"><div class="modal-item-label" data-en="Experience" data-id-text="Pengalaman">Pengalaman</div><div class="modal-item-val" id="mexp"></div></div>
+    </div>
+    <p class="modal-bio" data-en="Experienced and patient teacher who makes learning fun. Aligned with the Merdeka Belajar curriculum and highly recommended by parents." data-id-text="Guru berpengalaman dengan pendekatan yang menyenangkan dan sabar. Sesuai Kurikulum Merdeka Belajar. Direkomendasikan banyak orang tua.">Guru berpengalaman dengan pendekatan yang menyenangkan dan sabar. Sesuai Kurikulum Merdeka Belajar. Direkomendasikan banyak orang tua.</p>
+    <div class="modal-actions">
+      <button class="btn btn-primary" style="flex:1" onclick="closeModal();goPage('waitlist')" data-en="💬 Book Teacher" data-id-text="💬 Hubungi Guru">💬 Hubungi Guru</button>
+      <button class="btn btn-outline" onclick="closeModal()" data-en="Close" data-id-text="Tutup">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Mobile drawer
+function toggleDrawer() {
+  document.getElementById('mobileDrawer').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+function closeDrawer() {
+  document.getElementById('mobileDrawer').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+
+let currentLang = 'id';
+let waitlistCount = 247;
+let waitlistSubmitted = false;
+
+function goPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === id);
+  });
+  document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+  const tab = document.getElementById('tab-' + id);
+  if (tab) tab.classList.add('active');
+  closeDrawer();
+  window.scrollTo(0, 0);
+  triggerReveal();
+}
+
+// ── Language ──
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && lang === 'id') || (i === 1 && lang === 'en'));
+  });
+  document.querySelectorAll('[data-en],[data-id-text]').forEach(el => {
+    const key = lang === 'en' ? 'en' : 'idText';
+    const txt = el.dataset[key];
+    if (txt) el.innerHTML = txt;
+  });
+  // update placeholders
+  document.querySelectorAll('[data-placeholder-en]').forEach(el => {
+    el.placeholder = lang === 'en' ? el.dataset.placeholderEn : el.dataset.placeholderId;
+  });
+  // html lang
+  document.documentElement.lang = lang;
+}
+
+// ── How tabs ──
+function switchHowTab(btn, tab) {
+  document.querySelectorAll('.how-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('how-offline').style.display = tab === 'offline' ? 'grid' : 'none';
+  document.getElementById('how-online').style.display = tab === 'online' ? 'grid' : 'none';
+}
+
+// ── Filters ──
+function filterTeacher(btn) {
+  btn.closest('.filter-row').querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function toggleSidebar(btn) { btn.classList.toggle('active'); }
+function toggleSubjPill(btn) {
+  btn.closest('.courses-subject-nav').querySelectorAll('.subj-pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ── Teacher modal ──
+function openTeacherModal(name, subj, emoji, bg, dist, rating, price, students, exp) {
+  document.getElementById('mav').textContent = emoji;
+  document.getElementById('mav').style.background = bg;
+  document.getElementById('mname').textContent = name;
+  document.getElementById('msubj').textContent = subj;
+  document.getElementById('mdist').textContent = dist;
+  document.getElementById('mrating').textContent = '⭐ ' + rating;
+  document.getElementById('mprice').textContent = price;
+  document.getElementById('mexp').textContent = exp;
+  document.getElementById('teacherModal').classList.add('open');
+}
+function closeModal() { document.getElementById('teacherModal').classList.remove('open'); }
+
+// ── Waitlist submit ──
+function submitWaitlist() {
+  const name = document.getElementById('wlName').value.trim();
+  const phone = document.getElementById('wlPhone').value.trim();
+  const email = document.getElementById('wlEmail').value.trim();
+  if (!name || (!phone && !email)) {
+    alert(currentLang === 'id' ? 'Mohon isi nama dan nomor WhatsApp atau email kamu.' : 'Please fill in your name and WhatsApp/email.');
+    return;
+  }
+  waitlistCount++;
+  document.getElementById('successNum').textContent = waitlistCount;
+  document.getElementById('wlCount').textContent = waitlistCount;
+  document.getElementById('wlFormArea').classList.add('hidden');
+  document.getElementById('wlSuccess').classList.add('show');
+  if (currentLang === 'en') {
+    document.getElementById('successMsg').textContent = `Thanks ${name}! We'll notify you via WhatsApp when Learn To Learn launches in Yogyakarta.`;
+  } else {
+    document.getElementById('successMsg').textContent = `Terima kasih, ${name}! Kami akan menghubungi kamu via WhatsApp saat Learn To Learn hadir di Yogyakarta.`;
+  }
+}
+
+function toggleSubject(btn) { btn.classList.toggle('selected'); }
+
+function gotoRegStep(n) {
+  for (let i = 1; i <= 5; i++) {
+    const step = document.getElementById('rstep-' + i);
+    const sec = document.getElementById('rsec-' + i);
+    if (step) {
+      step.classList.remove('active', 'done');
+      if (i < n) step.classList.add('done');
+      else if (i === n) step.classList.add('active');
+    }
+    if (sec) sec.classList.toggle('active', i === n);
+  }
+  window.scrollTo(0, 0);
+}
+
+function submitTeacherReg() {
+  document.querySelectorAll('#rsec-1,#rsec-2,#rsec-3,#rsec-4,#rsec-5').forEach(s => s.style.display = 'none');
+  document.querySelectorAll('.reg-step-indicator').forEach(s => s.style.display = 'none');
+  document.getElementById('regSuccess').classList.add('show');
+  window.scrollTo(0, 0);
+}
+
+function shareTo() {
+  const text = currentLang === 'id'
+    ? 'Saya baru daftar ke Learn To Learn — platform bimbel pertama di Indonesia yang kaya Gojek! Cek di sini 👉'
+    : "I just joined Learn To Learn — Indonesia's first Gojek-style tutoring platform! Check it out 👉";
+  if (navigator.share) {
+    navigator.share({ title: 'Learn To Learn', text, url: window.location.href });
+  } else {
+    navigator.clipboard.writeText(text + ' ' + window.location.href)
+      .then(() => alert(currentLang === 'id' ? 'Link berhasil disalin!' : 'Link copied!'));
+  }
+}
+
+// ── Scroll reveal ──
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+
+function triggerReveal() {
+  setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  }, 100);
+}
+triggerReveal();
+</script>
+
+<!-- ══════════════════════════════════════
+     TEACHER REGISTRATION PAGE
+══════════════════════════════════════ -->
+<div class="page teacher-reg-page" id="page-teacher-reg">
+  <div class="teacher-reg-hero">
+    <div class="tag" data-en="Become a Teacher" data-id-text="Jadi Guru">Jadi Guru</div>
+    <h1 data-en="Teach, earn money,<br>work flexibly" data-id-text="Mengajar, cari penghasilan,<br>waktu fleksibel">Mengajar, cari penghasilan,<br>waktu fleksibel</h1>
+    <p data-en="Register online in under 10 minutes. Like Gojek drivers, you set your own schedule, subject, and rate. Start earning within 48 hours of approval." data-id-text="Daftar online dalam 10 menit. Seperti driver Gojek, kamu atur sendiri jadwal, mata pelajaran, dan tarif. Mulai terima murid dalam 48 jam setelah disetujui.">Daftar online dalam 10 menit. Seperti driver Gojek, kamu atur sendiri jadwal, mata pelajaran, dan tarif. Mulai terima murid dalam 48 jam setelah disetujui.</p>
+    <div class="teacher-perks-row">
+      <div class="teacher-perk">⏱️ <span data-en="Register in 10 minutes" data-id-text="Daftar 10 menit">Daftar 10 menit</span></div>
+      <div class="teacher-perk">✅ <span data-en="Approved within 48 hours" data-id-text="Disetujui dalam 48 jam">Disetujui dalam 48 jam</span></div>
+      <div class="teacher-perk">💰 <span data-en="Earn Rp 500k–3jt/month" data-id-text="Penghasilan Rp 500k–3jt/bln">Penghasilan Rp 500k–3jt/bln</span></div>
+      <div class="teacher-perk">🗓️ <span data-en="Fully flexible schedule" data-id-text="Jadwal 100% fleksibel">Jadwal 100% fleksibel</span></div>
+    </div>
+  </div>
+
+  <div class="teacher-reg-body">
+    <!-- FORM AREA -->
+    <div class="teacher-reg-form">
+
+      <!-- Step indicator -->
+      <div class="reg-step-indicator">
+        <div class="reg-step active" id="rstep-1" onclick="gotoRegStep(1)">
+          <div class="reg-step-circle">1</div>
+          <div class="reg-step-label" data-en="Personal Info" data-id-text="Data Diri">Data Diri</div>
+        </div>
+        <div class="reg-step" id="rstep-2" onclick="gotoRegStep(2)">
+          <div class="reg-step-circle">2</div>
+          <div class="reg-step-label" data-en="Subjects" data-id-text="Pelajaran">Pelajaran</div>
+        </div>
+        <div class="reg-step" id="rstep-3" onclick="gotoRegStep(3)">
+          <div class="reg-step-circle">3</div>
+          <div class="reg-step-label" data-en="Documents" data-id-text="Dokumen">Dokumen</div>
+        </div>
+        <div class="reg-step" id="rstep-4" onclick="gotoRegStep(4)">
+          <div class="reg-step-circle">4</div>
+          <div class="reg-step-label" data-en="Schedule" data-id-text="Jadwal">Jadwal</div>
+        </div>
+        <div class="reg-step" id="rstep-5" onclick="gotoRegStep(5)">
+          <div class="reg-step-circle">5</div>
+          <div class="reg-step-label" data-en="Review" data-id-text="Review">Review</div>
+        </div>
+      </div>
+
+      <!-- STEP 1: Personal Info -->
+      <div class="reg-section active" id="rsec-1">
+        <div class="reg-section-title" data-en="Personal Information" data-id-text="Data Diri">Data Diri</div>
+        <div class="reg-section-sub" data-en="Tell us about yourself. This info will be shown on your teacher profile." data-id-text="Ceritakan tentang dirimu. Informasi ini akan tampil di profil guru kamu.">Ceritakan tentang dirimu. Informasi ini akan tampil di profil guru kamu.</div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" data-en="Full Name" data-id-text="Nama Lengkap">Nama Lengkap</label>
+            <input class="form-input" type="text" placeholder="Sesuai KTP">
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-en="Nickname (shown to students)" data-id-text="Nama Panggilan (tampil ke murid)">Nama Panggilan</label>
+            <input class="form-input" type="text" placeholder="Contoh: Ibu Sari, Pak Budi">
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">WhatsApp</label>
+            <input class="form-input" type="tel" placeholder="08xx-xxxx-xxxx">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" placeholder="email@kamu.com">
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label" data-en="City / Area" data-id-text="Kota / Kecamatan">Kota / Kecamatan</label>
+            <select class="form-select">
+              <option>Yogyakarta Kota</option>
+              <option>Sleman</option>
+              <option>Bantul</option>
+              <option>Gunung Kidul</option>
+              <option>Kulon Progo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-en="Teaching Mode" data-id-text="Mode Mengajar">Mode Mengajar</label>
+            <select class="form-select">
+              <option data-en="Offline + Online" data-id-text="Offline + Online">Offline + Online</option>
+              <option data-en="Offline only (Home visit)" data-id-text="Offline saja (ke rumah murid)">Offline saja (ke rumah murid)</option>
+              <option data-en="Online only" data-id-text="Online saja">Online saja</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-grid-1">
+          <div class="form-group">
+            <label class="form-label" data-en="Short Bio (shown on profile)" data-id-text="Bio Singkat (tampil di profil)">Bio Singkat</label>
+            <textarea class="form-input" rows="3" style="resize:vertical" placeholder="Contoh: Saya mahasiswa Pendidikan Matematika UNY, berpengalaman 2 tahun mengajar les privat SD. Pendekatan saya sabar dan menyenangkan..."></textarea>
+          </div>
+        </div>
+        <div class="reg-nav-btns">
+          <button class="btn-reg-next" onclick="gotoRegStep(2)" data-en="Next: Subjects →" data-id-text="Lanjut: Pelajaran →">Lanjut: Pelajaran →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Subjects -->
+      <div class="reg-section" id="rsec-2">
+        <div class="reg-section-title" data-en="What will you teach?" data-id-text="Kamu mau mengajar apa?">Kamu mau mengajar apa?</div>
+        <div class="reg-section-sub" data-en="Select all subjects you're confident teaching. You can teach academic subjects, music, hobbies — anything!" data-id-text="Pilih semua pelajaran yang kamu kuasai. Boleh akademik, musik, hobi — apapun!">Pilih semua pelajaran yang kamu kuasai. Boleh akademik, musik, hobi — apapun!</div>
+
+        <div class="form-label" style="margin-bottom:10px">📚 <span data-en="Academic Subjects" data-id-text="Pelajaran Akademik">Pelajaran Akademik</span></div>
+        <div class="subject-picker" id="subjectPicker">
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🔢 Matematika</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🔬 IPA</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🌏 IPS</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">📖 B. Indonesia</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🇬🇧 B. Inggris</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🙏 PAI</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">💻 Informatika</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🧮 Matematika Olimpiade</button>
+        </div>
+
+        <div class="form-label" style="margin-bottom:10px;margin-top:20px">🎵 <span data-en="Music" data-id-text="Musik">Musik</span></div>
+        <div class="subject-picker">
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🎹 Piano</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🎸 Gitar Akustik</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🎸 Gitar Elektrik</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🎵 Ukulele</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🎻 Biola</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🎤 Vokal / Menyanyi</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🥁 Drum</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🎺 Keyboard</button>
+        </div>
+
+        <div class="form-label" style="margin-bottom:10px;margin-top:20px">🎨 <span data-en="Arts & Hobbies" data-id-text="Seni & Hobi">Seni & Hobi</span></div>
+        <div class="subject-picker">
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🎨 Menggambar & Melukis</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">💻 Desain Digital</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">📸 Fotografi</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🎬 Video Editing</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🍳 Memasak & Baking</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🧶 Menjahit & Kerajinan</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🏸 Bulu Tangkis</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🧘 Yoga & Meditasi</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🗣️ Public Speaking</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🇯🇵 Bahasa Jepang</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🇨🇳 Bahasa Mandarin</button>
+          <button class="subject-pick-btn" onclick="toggleSubject(this)">🕌 Bahasa Arab</button>
+        </div>
+
+        <div class="form-grid-2" style="margin-top:20px">
+          <div class="form-group">
+            <label class="form-label" data-en="Years of Experience" data-id-text="Lama Pengalaman Mengajar">Lama Pengalaman</label>
+            <select class="form-select">
+              <option data-en="Less than 1 year" data-id-text="Kurang dari 1 tahun">Kurang dari 1 tahun</option>
+              <option data-en="1–2 years" data-id-text="1–2 tahun">1–2 tahun</option>
+              <option data-en="3–5 years" data-id-text="3–5 tahun">3–5 tahun</option>
+              <option data-en="More than 5 years" data-id-text="Lebih dari 5 tahun">Lebih dari 5 tahun</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-en="Rate per Session (suggestion)" data-id-text="Tarif per Sesi (saran)">Tarif per Sesi</label>
+            <select class="form-select">
+              <option>Rp 30.000 – 50.000</option>
+              <option>Rp 50.000 – 75.000</option>
+              <option>Rp 75.000 – 100.000</option>
+              <option>Rp 100.000 – 150.000</option>
+              <option data-en="More than Rp 150.000" data-id-text="Lebih dari Rp 150.000">Lebih dari Rp 150.000</option>
+            </select>
+          </div>
+        </div>
+        <div class="reg-nav-btns">
+          <button class="btn-reg-back" onclick="gotoRegStep(1)" data-en="← Back" data-id-text="← Kembali">← Kembali</button>
+          <button class="btn-reg-next" onclick="gotoRegStep(3)" data-en="Next: Documents →" data-id-text="Lanjut: Dokumen →">Lanjut: Dokumen →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Documents -->
+      <div class="reg-section" id="rsec-3">
+        <div class="reg-section-title" data-en="Upload Your Documents" data-id-text="Upload Dokumen">Upload Dokumen</div>
+        <div class="reg-section-sub" data-en="All documents are encrypted and used only for identity verification. Your data is safe with us." data-id-text="Semua dokumen dienkripsi dan hanya digunakan untuk verifikasi identitas. Data kamu aman bersama kami.">Semua dokumen dienkripsi dan hanya digunakan untuk verifikasi. Data kamu aman.</div>
+
+        <div class="upload-zone" onclick="this.classList.toggle('uploaded')">
+          <div class="upload-zone-icon">🪪</div>
+          <div class="upload-zone-title" data-en="KTP (Identity Card) *Required" data-id-text="KTP (Kartu Tanda Penduduk) *Wajib">KTP *Wajib</div>
+          <div class="upload-zone-sub" data-en="Photo or scan of your KTP — JPG, PNG or PDF, max 5MB" data-id-text="Foto atau scan KTP — JPG, PNG atau PDF, maks 5MB">Foto atau scan KTP — JPG, PNG atau PDF, maks 5MB</div>
+        </div>
+
+        <div class="upload-zone" onclick="this.classList.toggle('uploaded')">
+          <div class="upload-zone-icon">🎓</div>
+          <div class="upload-zone-title" data-en="Diploma / Certificate *Required" data-id-text="Ijazah / Sertifikat *Wajib">Ijazah / Sertifikat *Wajib</div>
+          <div class="upload-zone-sub" data-en="For academic subjects: diploma. For music/hobbies: achievement certificate or lesson certificate." data-id-text="Untuk pelajaran akademik: ijazah. Untuk musik/hobi: sertifikat prestasi atau kursus.">Untuk akademik: ijazah. Untuk musik/hobi: sertifikat prestasi atau kursus.</div>
+        </div>
+
+        <div class="upload-zone" onclick="this.classList.toggle('uploaded')">
+          <div class="upload-zone-icon">📸</div>
+          <div class="upload-zone-title" data-en="Profile Photo *Required" data-id-text="Foto Profil *Wajib">Foto Profil *Wajib</div>
+          <div class="upload-zone-sub" data-en="Clear face photo, decent background — this will appear on your teacher profile." data-id-text="Foto wajah jelas, latar belakang rapi — akan tampil di profil guru kamu.">Foto wajah jelas, latar rapi — tampil di profil guru kamu.</div>
+        </div>
+
+        <div class="upload-zone" onclick="this.classList.toggle('uploaded')">
+          <div class="upload-zone-icon">🎥</div>
+          <div class="upload-zone-title" data-en="Short Introduction Video (Optional but recommended)" data-id-text="Video Perkenalan Singkat (Opsional, tapi disarankan)">Video Perkenalan (Opsional tapi disarankan)</div>
+          <div class="upload-zone-sub" data-en="30–60 second video introducing yourself. Significantly increases your booking rate!" data-id-text="Video 30–60 detik perkenalan diri. Terbukti meningkatkan peluang dapat murid!">Video 30–60 detik perkenalan diri. Terbukti meningkatkan peluang dapat murid!</div>
+        </div>
+
+        <div class="reg-nav-btns">
+          <button class="btn-reg-back" onclick="gotoRegStep(2)" data-en="← Back" data-id-text="← Kembali">← Kembali</button>
+          <button class="btn-reg-next" onclick="gotoRegStep(4)" data-en="Next: Schedule →" data-id-text="Lanjut: Jadwal →">Lanjut: Jadwal →</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Schedule -->
+      <div class="reg-section" id="rsec-4">
+        <div class="reg-section-title" data-en="Set Your Availability" data-id-text="Atur Ketersediaan Kamu">Atur Ketersediaan Kamu</div>
+        <div class="reg-section-sub" data-en="Students will only be able to book sessions on days and times you're available. You can change this anytime." data-id-text="Murid hanya bisa booking di hari dan jam yang kamu pilih. Bisa diubah kapan saja.">Murid hanya bisa booking di hari dan jam yang kamu pilih. Bisa diubah kapan saja.</div>
+
+        <div class="form-label" style="margin-bottom:10px" data-en="Available Days" data-id-text="Hari Tersedia">Hari Tersedia</div>
+        <div class="availability-grid">
+          <button class="day-btn" onclick="this.classList.toggle('selected')">Sen</button>
+          <button class="day-btn selected" onclick="this.classList.toggle('selected')">Sel</button>
+          <button class="day-btn selected" onclick="this.classList.toggle('selected')">Rab</button>
+          <button class="day-btn selected" onclick="this.classList.toggle('selected')">Kam</button>
+          <button class="day-btn" onclick="this.classList.toggle('selected')">Jum</button>
+          <button class="day-btn selected" onclick="this.classList.toggle('selected')">Sab</button>
+          <button class="day-btn selected" onclick="this.classList.toggle('selected')">Min</button>
+        </div>
+
+        <div class="form-label" style="margin-bottom:10px;margin-top:6px" data-en="Available Time Slots" data-id-text="Jam Tersedia">Jam Tersedia</div>
+        <div class="time-slots">
+          <button class="time-slot" onclick="this.classList.toggle('selected')">07:00–09:00</button>
+          <button class="time-slot selected" onclick="this.classList.toggle('selected')">09:00–11:00</button>
+          <button class="time-slot" onclick="this.classList.toggle('selected')">11:00–13:00</button>
+          <button class="time-slot selected" onclick="this.classList.toggle('selected')">13:00–15:00</button>
+          <button class="time-slot selected" onclick="this.classList.toggle('selected')">15:00–17:00</button>
+          <button class="time-slot" onclick="this.classList.toggle('selected')">17:00–19:00</button>
+          <button class="time-slot" onclick="this.classList.toggle('selected')">19:00–21:00</button>
+        </div>
+
+        <div class="form-grid-2" style="margin-top:8px">
+          <div class="form-group">
+            <label class="form-label" data-en="Max sessions/day" data-id-text="Maks sesi per hari">Maks sesi per hari</label>
+            <select class="form-select">
+              <option>1 sesi</option>
+              <option selected>2 sesi</option>
+              <option>3 sesi</option>
+              <option>4 sesi</option>
+              <option data-en="Unlimited" data-id-text="Tidak terbatas">Tidak terbatas</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-en="Session Duration" data-id-text="Durasi per Sesi">Durasi per Sesi</label>
+            <select class="form-select">
+              <option>60 menit</option>
+              <option selected>90 menit</option>
+              <option>120 menit</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top:8px">
+          <label class="form-label" data-en="Max travel distance (offline mode)" data-id-text="Jangkauan maksimal ke murid (mode offline)">Jangkauan ke murid (offline)</label>
+          <select class="form-select">
+            <option>1 km</option>
+            <option>2 km</option>
+            <option selected>5 km</option>
+            <option>10 km</option>
+            <option data-en="No limit" data-id-text="Tidak terbatas">Tidak terbatas</option>
+          </select>
+        </div>
+
+        <div class="reg-nav-btns">
+          <button class="btn-reg-back" onclick="gotoRegStep(3)" data-en="← Back" data-id-text="← Kembali">← Kembali</button>
+          <button class="btn-reg-next" onclick="gotoRegStep(5)" data-en="Next: Review →" data-id-text="Lanjut: Review →">Lanjut: Review →</button>
+        </div>
+      </div>
+
+      <!-- STEP 5: Review & Submit -->
+      <div class="reg-section" id="rsec-5">
+        <div class="reg-section-title" data-en="Review & Submit" data-id-text="Review & Kirim">Review & Kirim</div>
+        <div class="reg-section-sub" data-en="Almost done! Review your info below and submit. Our team will review your application within 24–48 hours." data-id-text="Hampir selesai! Cek info kamu di bawah dan kirim. Tim kami akan mereview dalam 24–48 jam.">Hampir selesai! Tim kami akan mereview dalam 24–48 jam.</div>
+
+        <div style="background:var(--gray1);border-radius:20px;padding:24px;margin-bottom:20px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div><div class="form-label" data-en="Name" data-id-text="Nama">Nama</div><div style="font-size:15px;font-weight:700;color:var(--navy);margin-top:4px">Ibu Contoh</div></div>
+            <div><div class="form-label">WhatsApp</div><div style="font-size:15px;font-weight:700;color:var(--navy);margin-top:4px">0812-xxxx-xxxx</div></div>
+            <div><div class="form-label" data-en="Location" data-id-text="Lokasi">Lokasi</div><div style="font-size:15px;font-weight:700;color:var(--navy);margin-top:4px">Yogyakarta</div></div>
+            <div><div class="form-label" data-en="Mode" data-id-text="Mode">Mode</div><div style="font-size:15px;font-weight:700;color:var(--navy);margin-top:4px">Offline + Online</div></div>
+          </div>
+          <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(14,30,53,.08)">
+            <div class="form-label" data-en="Selected Subjects" data-id-text="Pelajaran Dipilih">Pelajaran Dipilih</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+              <span class="chip chip-navy">🔢 Matematika</span>
+              <span class="chip chip-navy">🎹 Piano</span>
+              <span class="chip chip-navy">🎸 Gitar</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:rgba(0,191,165,.08);border:1px solid rgba(0,191,165,.2);border-radius:16px;padding:16px;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start">
+          <span style="font-size:20px">✅</span>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--navy)" data-en="What happens next?" data-id-text="Apa yang terjadi selanjutnya?">Apa yang terjadi selanjutnya?</div>
+            <div style="font-size:13px;color:var(--gray3);margin-top:4px;line-height:1.6" data-en="Our team will review your documents within 24–48 hours. You'll receive a WhatsApp notification once your account is approved and you can start accepting students." data-id-text="Tim kami akan mereview dokumen kamu dalam 24–48 jam. Kamu akan mendapat notifikasi WhatsApp begitu akunmu disetujui dan siap menerima murid.">Tim kami akan mereview dokumen kamu dalam 24–48 jam. Kamu akan mendapat notifikasi WhatsApp begitu akunmu disetujui.</div>
+          </div>
+        </div>
+
+        <div class="form-checkbox-row" style="margin-bottom:20px">
+          <input type="checkbox" class="form-checkbox" id="regAgree" checked>
+          <label class="form-checkbox-label" for="regAgree" data-en="I agree to Learn To Learn's Teacher Terms & Conditions and Code of Conduct." data-id-text="Saya menyetujui Syarat & Ketentuan Guru dan Kode Etik Learn To Learn.">Saya menyetujui Syarat & Ketentuan Guru dan Kode Etik Learn To Learn.</label>
+        </div>
+
+        <div class="reg-nav-btns">
+          <button class="btn-reg-back" onclick="gotoRegStep(4)" data-en="← Back" data-id-text="← Kembali">← Kembali</button>
+          <button class="btn-reg-next" onclick="submitTeacherReg()" data-en="🚀 Submit Application" data-id-text="🚀 Kirim Pendaftaran">🚀 Kirim Pendaftaran</button>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="reg-success" id="regSuccess">
+        <div class="success-icon">🎉</div>
+        <h2 class="success-title" data-en="Application Submitted!" data-id-text="Pendaftaran Terkirim!">Pendaftaran Terkirim!</h2>
+        <p class="success-sub" data-en="Our team will review your documents within 24–48 hours. You'll receive a WhatsApp notification once approved. Welcome to Learn To Learn!" data-id-text="Tim kami akan mereview dokumenmu dalam 24–48 jam. Notifikasi WhatsApp akan dikirim setelah disetujui. Selamat bergabung di Learn To Learn!">Tim kami akan mereview dokumenmu dalam 24–48 jam. Notifikasi WhatsApp akan dikirim setelah disetujui. Selamat bergabung!</p>
+        <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="goPage('home')" data-en="← Back to Home" data-id-text="← Kembali ke Beranda">← Kembali ke Beranda</button>
+          <button class="btn btn-outline" onclick="shareTo()" data-en="📢 Share with Friends" data-id-text="📢 Share ke Teman">📢 Share ke Teman</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="teacher-reg-sidebar">
+      <div class="earnings-card">
+        <div class="earnings-title" data-en="Potential Monthly Earnings" data-id-text="Potensi Penghasilan Bulanan">Potensi Penghasilan Bulanan</div>
+        <div class="earnings-amount">Rp 1,5 jt</div>
+        <div class="earnings-period" data-en="avg. part-time teacher · 2 sessions/day" data-id-text="rata-rata guru paruh waktu · 2 sesi/hari">rata-rata guru paruh waktu · 2 sesi/hari</div>
+        <div class="earnings-breakdown">
+          <div class="earn-row"><span>2 sesi/hari × Rp 60k</span><strong>Rp 120k/hari</strong></div>
+          <div class="earn-row"><span>× 5 hari/minggu</span><strong>Rp 600k/minggu</strong></div>
+          <div class="earn-row"><span>× 4 minggu</span><strong>Rp 2,4jt/bulan</strong></div>
+          <div class="earn-row" style="padding-top:8px;border-top:1px solid rgba(255,255,255,.15)"><span>Setelah komisi 20%</span><strong style="color:var(--yellow)">≈ Rp 1,9jt/bln</strong></div>
+        </div>
+      </div>
+
+      <div class="sidebar-why">
+        <div class="sidebar-why-title" data-en="Why teach with Learn To Learn?" data-id-text="Kenapa mengajar di Learn To Learn?">Kenapa mengajar di Learn To Learn?</div>
+        <div class="why-item">
+          <div class="why-icon">⏰</div>
+          <div><div class="why-text-title" data-en="100% Flexible Schedule" data-id-text="Jadwal 100% Fleksibel">Jadwal 100% Fleksibel</div><div class="why-text-sub" data-en="Teach when you want. No minimum hours required." data-id-text="Mengajar kapan kamu mau. Tidak ada minimum jam.">Mengajar kapan kamu mau. Tidak ada minimum jam.</div></div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">📍</div>
+          <div><div class="why-text-title" data-en="Students Come to You (digitally)" data-id-text="Murid yang Cari Kamu">Murid yang Cari Kamu</div><div class="why-text-sub" data-en="Our platform connects you to nearby students automatically." data-id-text="Platform kami otomatis menghubungkan kamu ke murid terdekat.">Platform otomatis menghubungkan kamu ke murid terdekat.</div></div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">💳</div>
+          <div><div class="why-text-title" data-en="Fast & Safe Payment" data-id-text="Pembayaran Cepat & Aman">Pembayaran Cepat & Aman</div><div class="why-text-sub" data-en="Payment is handled through the platform, transferred to your account weekly." data-id-text="Pembayaran melalui platform, ditransfer ke rekeningmu tiap minggu.">Pembayaran melalui platform, ditransfer ke rekeningmu tiap minggu.</div></div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🛡️</div>
+          <div><div class="why-text-title" data-en="Protection & Insurance" data-id-text="Perlindungan & Asuransi">Perlindungan & Asuransi</div><div class="why-text-sub" data-en="All teachers get basic accident insurance when doing home visits." data-id-text="Semua guru mendapat asuransi kecelakaan dasar saat kunjungan ke murid.">Semua guru mendapat asuransi dasar saat kunjungan ke murid.</div></div>
+        </div>
+      </div>
+
+      <div class="teacher-testimonial">
+        <div class="teacher-testi-text" data-en='"Since joining Learn To Learn, I earn an extra Rp 2 million a month just from weekend teaching. The registration was super easy!"' data-id-text='"Sejak bergabung di Learn To Learn, saya dapat tambahan Rp 2 juta per bulan hanya dari mengajar weekend. Pendaftarannya gampang banget!"'>"Sejak bergabung di Learn To Learn, saya dapat tambahan Rp 2 juta per bulan hanya dari mengajar weekend. Pendaftarannya gampang banget!"</div>
+        <div class="teacher-testi-author">Pak Doni, 24</div>
+        <div class="teacher-testi-role" data-en="Mahasiswa S1 Pendidikan UNY · Teaches Math & Guitar" data-id-text="Mahasiswa S1 Pendidikan UNY · Mengajar Matematika & Gitar">Mahasiswa S1 Pendidikan UNY · Mengajar Matematika & Gitar</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
